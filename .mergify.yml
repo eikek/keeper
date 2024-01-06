@@ -1,0 +1,32 @@
+pull_request_rules:
+  - name: assign and label scala-steward's PRs
+    conditions:
+      - author=eikek-scala-steward[bot]
+    actions:
+      assign:
+        users: [eikek]
+      label:
+        add: ["type: dependencies"]
+  - name: automatically merge Scala Steward PRs on CI success
+    conditions:
+      - author=eikek-scala-steward[bot]
+      - base=main
+      - status-success=ci
+    actions:
+      merge:
+        method: squash
+  - name: automatically merge my (eikek) PRs on CI success
+    conditions:
+      - author=eikek
+      - base=main
+      - status-success=ci
+    actions:
+      merge:
+        method: merge
+  - name: automatic update for dependency update PRs
+    conditions:
+      - -conflict # skip PRs with conflicts
+      - -draft # filter-out GH draft PRs
+      - "label=type: dependencies"
+    actions:
+      update: {}

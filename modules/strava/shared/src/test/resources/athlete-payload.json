@@ -1,0 +1,100 @@
+{
+  "id": 101,
+  "username": null,
+  "resource_state": 3,
+  "firstname": "john",
+  "lastname": "k",
+  "bio": null,
+  "city": "SomeCity",
+  "state": "SomeState",
+  "country": "Switzerland",
+  "sex": "M",
+  "premium": true,
+  "summit": true,
+  "created_at": "2023-07-08T15:34:56Z",
+  "updated_at": "2023-11-01T07:04:54Z",
+  "badge_type_id": 1,
+  "weight": 81.0,
+  "profile_medium": "https://cloudfront.net/assets/avatar/athlete/medium.png",
+  "profile": "https://cloudfront.net/assets/avatar/athlete/large.png",
+  "friend": null,
+  "follower": null,
+  "blocked": false,
+  "can_follow": true,
+  "follower_count": 8,
+  "friend_count": 9,
+  "mutual_friend_count": 0,
+  "athlete_type": 0,
+  "date_preference": "%m/%d/%Y",
+  "measurement_preference": "meters",
+  "clubs": [
+    {
+      "id": 510756,
+      "resource_state": 2,
+      "name": "Club",
+      "profile_medium": "https://cloudfront.net/pictures/clubs/medium.jpg",
+      "profile": "https://cloudfront.net/pictures/clubs/large.jpg",
+      "cover_photo": "https://cloudfront.net/pictures/clubs/large.jpg",
+      "cover_photo_small": "https://cloudfront.net/pictures/clubs/small.jpg",
+      "activity_types": [],
+      "activity_types_icon": "sports_multi_normal",
+      "dimensions": [
+        "moving_time",
+        "num_activities",
+        "distance",
+        "elev_gain"
+      ],
+      "sport_type": "other",
+      "localized_sport_type": "Multisport",
+      "city": "Zürich",
+      "state": "Zurich",
+      "country": "Switzerland",
+      "private": true,
+      "member_count": 0,
+      "featured": false,
+      "verified": false,
+      "url": "club",
+      "membership": "member",
+      "admin": false,
+      "owner": false
+    }
+  ],
+  "postable_clubs_count": 1,
+  "ftp": 208,
+  "bikes": [
+    {
+      "id": "b11",
+      "primary": false,
+      "name": "BMC",
+      "nickname": "BMC",
+      "resource_state": 2,
+      "retired": false,
+      "distance": 24988,
+      "converted_distance": 25.0
+    },
+    {
+      "id": "b12",
+      "primary": false,
+      "name": "Felt",
+      "nickname": "Felt",
+      "resource_state": 2,
+      "retired": false,
+      "distance": 127430,
+      "converted_distance": 127.4
+    }
+  ],
+  "shoes": [
+    {
+      "id": "g1",
+      "primary": false,
+      "name": "Nike",
+      "nickname": "",
+      "resource_state": 2,
+      "retired": false,
+      "distance": 48518,
+      "converted_distance": 48.5
+    }
+  ],
+  "is_winback_via_upload": false,
+  "is_winback_via_view": false
+}
