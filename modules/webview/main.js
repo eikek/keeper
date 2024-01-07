@@ -1,5 +1,4 @@
 import './style.css'
-import 'plotly.js-dist'
 import 'scalajs:main.js'
 /*
     border border-b
