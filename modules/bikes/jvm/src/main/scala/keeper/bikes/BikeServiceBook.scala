@@ -10,8 +10,6 @@ trait BikeServiceBook[F[_]] {
 
   def generateMissingCacheEntries: F[Unit]
 
-  def getServices(until: Option[Instant], page: Page): F[List[BikeService]]
-
   def getServiceDetail(mask: ServiceSearchMask): Stream[F, ServiceDetail]
 
   def getBikesAt(

@@ -3,8 +3,8 @@ package keeper.bikes.db.postgres
 import java.time.Instant
 
 import cats.NonEmptyParallel
-import cats.data.NonEmptyList
-import cats.effect._
+import cats.data.{EitherT, NonEmptyList, OptionT}
+import cats.effect.*
 import cats.effect.std.Console
 import cats.syntax.all.*
 import fs2.io.net.Network
@@ -42,11 +42,12 @@ final class PostgresInventory[F[_]: Sync: NonEmptyParallel](
 
   def getCurrentBuilds: F[MaintenanceBuild] =
     maintenance.maintenanceFromLatestCached.flatMap { (start, maintenances) =>
-      maintenances
-        .through(ConfigBuilder.build(start))
-        .compile
-        .last
-        .map(_.getOrElse(MaintenanceBuild.empty(MaintenanceId(-1))))
+      OptionT(
+        maintenances
+          .through(ConfigBuilder.build(start))
+          .compile
+          .last
+      ).getOrElseF(maintenance.maintenanceZero)
     }
 
   def getCurrentBikes(
@@ -57,11 +58,12 @@ final class PostgresInventory[F[_]: Sync: NonEmptyParallel](
   def getBuildsAt(at: Instant): F[MaintenanceBuild] =
     logger.info(s"Getting builds at $at") >>
       maintenance.maintenanceFromLatestCachedUntil(at).flatMap { (start, maintenances) =>
-        maintenances
-          .through(ConfigBuilder.build(start))
-          .compile
-          .last
-          .map(_.getOrElse(MaintenanceBuild.empty(MaintenanceId(-1))))
+        OptionT(
+          maintenances
+            .through(ConfigBuilder.build(start))
+            .compile
+            .last
+        ).getOrElseF(maintenance.maintenanceZero)
       }
 
   def getBikesAt(
@@ -71,23 +73,19 @@ final class PostgresInventory[F[_]: Sync: NonEmptyParallel](
     val devTotals = DeviceTotals(
       currentTotals.map(b => b.bikeId -> TotalOutput(b.distance.toMeter)).toMap
     )
-    getBuildsAt(at).flatMap(mb =>
-      resolver
-        .resolve(mb.build, at)
-        .map(
-          _.map(
-            BikeBuilds.componentTotals
-              .replace(
-                mb.tracker
-                  .finish(devTotals)
-                  .view
-                  .mapValues(_.toDistance)
-                  .toMap
-              )
-              .andThen(BikeBuilds.bikeTotals.replace(currentTotals))
-          )
-        )
-    )
+    (for {
+      mb <- EitherT.liftF(getBuildsAt(at))
+      resolved <- EitherT(resolver.resolve(mb.build, at))
+      totals = mb.tracker
+        .finish(devTotals)
+        .view
+        .mapValues(_.toDistance)
+        .toMap
+
+      modify = BikeBuilds.componentTotals
+        .replace(totals)
+        .andThen(BikeBuilds.bikeTotals.replace(currentTotals))
+    } yield modify(resolved)).value
 
   def getComponentsAt(at: Instant): F[List[ComponentWithDevice]] =
     (components.findAllAt(at), getBuildsAt(at))

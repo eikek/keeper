@@ -3,7 +3,7 @@ package keeper.server
 import java.time.ZoneId
 
 import cats.data.EitherT
-import cats.effect.{Clock, Sync}
+import cats.effect.Sync
 import cats.syntax.all.*
 
 import keeper.bikes.BikeShop
@@ -51,16 +51,6 @@ final class BikeRoutes[F[_]: Sync](
         res <- shop.serviceBook.getServiceDetail(in).compile.toVector
         resp <- Ok(res.reverse)
       } yield resp
-
-    case GET -> Root / "service" :? atVar(at) +& PageVar(page) =>
-      (at.fold(Clock[F].realTimeInstant.validNel)(_.map(_.pure[F])), page).mapN {
-        (ts, p) =>
-          for {
-            until <- ts
-            res <- shop.serviceBook.getServices(until.some, p)
-            resp <- Ok(res)
-          } yield resp
-      }.orBadRequest
 
     case req @ POST -> Root / "service" / "submit" =>
       for {

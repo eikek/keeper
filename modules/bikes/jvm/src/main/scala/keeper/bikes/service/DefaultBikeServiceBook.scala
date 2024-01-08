@@ -7,7 +7,7 @@ import cats.syntax.all.*
 
 import keeper.bikes.db.{Inventory, MaintenanceRepository}
 import keeper.bikes.model.*
-import keeper.bikes.{BikeServiceBook, DistanceFinder, Page}
+import keeper.bikes.{BikeServiceBook, DistanceFinder}
 
 final class DefaultBikeServiceBook[F[_]: Sync](
     inventory: Inventory[F],
@@ -16,9 +16,6 @@ final class DefaultBikeServiceBook[F[_]: Sync](
 ) extends BikeServiceBook[F] {
   def generateMissingCacheEntries: F[Unit] =
     repo.generateMissingCache
-
-  def getServices(until: Option[Instant], page: Page): F[List[BikeService]] =
-    repo.findBikeServices(until, page)
 
   def getServiceDetail(mask: ServiceSearchMask): fs2.Stream[F, ServiceDetail] =
     repo.getServiceDetails(mask)

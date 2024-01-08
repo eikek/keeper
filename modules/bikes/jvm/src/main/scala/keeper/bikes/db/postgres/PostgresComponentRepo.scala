@@ -10,6 +10,7 @@ import keeper.bikes.SimpleQuery
 import keeper.bikes.data.{ComponentType, ComponentWithProduct, NewComponent}
 import keeper.bikes.db.ComponentRepository
 import keeper.bikes.model.BikeServiceError
+import keeper.common.Distance
 import keeper.core.ComponentId
 
 import skunk.Session
@@ -72,4 +73,10 @@ final class PostgresComponentRepo[F[_]: Sync](session: Resource[F, Session[F]])
       at: Instant
   ): F[List[ComponentWithProduct]] =
     session.use(_.execute(ComponentSql.findAllByTypeAt(types.size))(at -> types.toList))
+
+  def findInitialTotals(includes: List[ComponentId]): F[List[(ComponentId, Distance)]] = {
+    val f = ComponentSql.findInitialTotals(includes)
+    val q = f.fragment.query(Codecs.componentId ~ Codecs.distance)
+    session.use(s => s.execute(q)(f.argument))
+  }
 }
