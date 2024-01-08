@@ -19,7 +19,7 @@ object Distance:
       s.toDoubleOption.toRight(s"Invalid distance: $str")
     if (lcs.endsWith("km")) asDouble(lcs.dropRight(2)).map(km)
     else if (lcs.endsWith("m")) asDouble(lcs.dropRight(1)).map(meter)
-    else asDouble(lcs).map(meter)
+    else asDouble(lcs).map(km)
 
   given Show[Distance] =
     Show.show { m =>

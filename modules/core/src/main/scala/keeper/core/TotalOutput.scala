@@ -32,6 +32,7 @@ object TotalOutput:
   extension (self: TotalOutput)
     def +(other: TotalOutput): TotalOutput = TotalOutput(self + other)
     def -(other: TotalOutput): TotalOutput = TotalOutput(self - other)
+    def *(factor: Double): TotalOutput = self * factor
     def >(n: TotalOutput): Boolean = self > n
     def >=(n: TotalOutput): Boolean = self >= n
     def <(n: TotalOutput): Boolean = self < n
