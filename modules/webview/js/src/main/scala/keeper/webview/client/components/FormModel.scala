@@ -6,7 +6,7 @@ import cats.data.ValidatedNel
 import cats.syntax.all.*
 
 import keeper.bikes.data.*
-import keeper.common.Lenses
+import keeper.common.{Distance, Lenses}
 import keeper.core.{ComponentId, TotalOutput}
 import keeper.webview.client.shared.QuerySelect
 
@@ -34,17 +34,17 @@ final case class FormModel(
     addedAtValidated.fold(_.head.some, _ => None)
 
   def nameValidated: ValidatedNel[String, String] =
-    name.toValidNel("A uniqe name is required")
+    name.toValidNel("A unique name is required")
 
   def nameError: Option[String] = nameValidated.fold(_.head.some, _ => None)
 
   def productValidated: ValidatedNel[String, ProductWithBrand] =
     product.value.toValidNel("Please select an appropriate product from the catalogue.")
 
-  def initialTotalValidated: ValidatedNel[String, TotalOutput] =
+  def initialTotalValidated: ValidatedNel[String, Distance] =
     initialTotal match
-      case Some(t) => TotalOutput.fromString(t).toValidatedNel[String]
-      case None    => TotalOutput.zero.validNel
+      case Some(t) => Distance.fromString(t).toValidatedNel
+      case None    => Distance.zero.validNel
 
   def initialTotalError: Option[String] =
     initialTotalValidated.fold(_.head.some, _ => None)
@@ -58,7 +58,7 @@ final case class FormModel(
       description.validNel[String],
       state.validNel[String],
       addedAtValidated.map(_.atTime(12, 0, 0).atZone(zone).toInstant),
-      initialTotalValidated
+      initialTotalValidated.map(TotalOutput.fromDistance)
     ).mapN(NewComponent.apply).map(componentId -> _)
 
   def setComponent(zone: ZoneId)(c: ComponentWithProduct): FormModel =
@@ -69,8 +69,10 @@ final case class FormModel(
       description = c.component.description,
       state = c.component.state,
       addedAt = c.component.addedAt.atZone(zone).toLocalDate.toString.some,
-      initialTotal =
-        Option(c.component.initialTotal).filter(_.isPositive).map(_.toString),
+      initialTotal = Option(c.component.initialTotal)
+        .filter(_.isPositive)
+        .map(_.toDistance)
+        .map(_.show),
       saveInProgress = false
     )
 
