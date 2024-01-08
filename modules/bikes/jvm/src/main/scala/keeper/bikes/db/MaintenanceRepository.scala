@@ -10,6 +10,9 @@ import keeper.bikes.service.TranslatedEvent
 import keeper.core.*
 
 trait MaintenanceRepository[F[_]] {
+
+  def maintenanceZero: F[MaintenanceBuild]
+
   def findBikeServices(until: Option[Instant], page: Page): F[List[BikeService]]
 
   def storeAsMaintenance(bs: BikeService): F[MaintenanceId]

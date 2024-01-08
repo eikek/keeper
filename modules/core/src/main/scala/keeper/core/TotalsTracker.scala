@@ -91,8 +91,11 @@ object TotalsTracker:
       .toMap
     new TotalsTracker(build, newTotals)
 
-  val empty: TotalsTracker =
-    new TotalsTracker(DeviceBuild.empty, Map.empty)
+  def empty(initialTotals: Map[ComponentId, TotalOutput]): TotalsTracker =
+    new TotalsTracker(
+      DeviceBuild.empty,
+      initialTotals.view.map { case (k, v) => k -> Entry(k, v, None) }.toMap
+    )
 
   private def totalsFor(cid: ComponentId, build: DeviceBuild, totals: DeviceTotals) =
     build.findDevice(cid).map(totals.getOrZero).getOrElse(TotalOutput.zero)

@@ -95,29 +95,42 @@ final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]]
       .through(groupEvents)
 
   def maintenanceFromLatestCached: F[(MaintenanceBuild, Stream[F, Maintenance])] =
-    findLatestCachedBuild(None).map {
-      case None => (MaintenanceBuild.empty(MaintenanceId(-1)), allMaintenances)
+    findLatestCachedBuild(None).flatMap {
+      case None =>
+        maintenanceZero.map(b => (b, allMaintenances))
+
       case Some(start) =>
         val stream = Stream
           .resource(session)
           .evalMap(_.prepare(MaintenanceSql.maintenanceWithTotalsAfter))
           .flatMap(_.stream(start.maintenance.id, 100))
           .through(groupEvents)
-        (start, stream)
+        (start, stream).pure[F]
     }
+
+  def maintenanceZero: F[MaintenanceBuild] =
+    initialTotals.map(t => MaintenanceBuild.empty(MaintenanceId(-1), t))
+
+  private def initialTotals: F[Map[ComponentId, TotalOutput]] = {
+    val f = ComponentSql.findInitialTotals(Nil)
+    val q = f.fragment.query(Codecs.componentId ~ Codecs.totalOutput)
+    session.use(s => s.execute(q)(f.argument)).map(_.toMap)
+  }
 
   def maintenanceFromLatestCachedUntil(
       at: Instant
   ): F[(MaintenanceBuild, Stream[F, Maintenance])] =
-    findLatestCachedBuild(Some(at)).map {
-      case None => (MaintenanceBuild.empty(MaintenanceId(-1)), allMaintenancesUntil(at))
+    findLatestCachedBuild(Some(at)).flatMap {
+      case None =>
+        maintenanceZero.map(b => (b, allMaintenancesUntil(at)))
+
       case Some(start) =>
         val stream = Stream
           .resource(session)
           .evalMap(_.prepare(MaintenanceSql.maintenanceWithTotalsBetween))
           .flatMap(_.stream(at -> start.maintenance.id, 100))
           .through(groupEvents)
-        (start, stream)
+        (start, stream).pure[F]
     }
 
   private def groupEvents(

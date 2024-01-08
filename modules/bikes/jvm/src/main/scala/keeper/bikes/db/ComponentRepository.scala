@@ -7,6 +7,7 @@ import cats.data.{NonEmptyList, NonEmptySet}
 import keeper.bikes.SimpleQuery
 import keeper.bikes.data.{ComponentType, ComponentWithProduct, NewComponent}
 import keeper.bikes.model.BikeServiceError
+import keeper.common.Distance
 import keeper.core.ComponentId
 
 trait ComponentRepository[F[_]] {
@@ -31,4 +32,6 @@ trait ComponentRepository[F[_]] {
       types: NonEmptyList[ComponentType],
       at: Instant
   ): F[List[ComponentWithProduct]]
+
+  def findInitialTotals(includes: List[ComponentId]): F[List[(ComponentId, Distance)]]
 }
