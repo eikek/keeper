@@ -11,7 +11,7 @@ import keeper.core.*
 
 trait MaintenanceRepository[F[_]] {
 
-  def maintenanceZero: F[MaintenanceBuild]
+  def maintenanceZero(at: Instant): F[MaintenanceBuild]
 
   def findBikeServices(until: Option[Instant], page: Page): F[List[BikeService]]
 
@@ -19,13 +19,13 @@ trait MaintenanceRepository[F[_]] {
 
   def storeEvents(id: MaintenanceId, events: List[TranslatedEvent]): F[Unit]
 
-  def maintenanceFromLatestCached: F[(MaintenanceBuild, Stream[F, Maintenance])]
-
   def maintenanceFromLatestCachedUntil(
       at: Instant
   ): F[(MaintenanceBuild, Stream[F, Maintenance])]
 
   def generateMissingCache: F[Unit]
+
+  def recreateCache: F[Unit]
 
   def getServiceDetails(search: ServiceSearchMask): Stream[F, ServiceDetail]
 }

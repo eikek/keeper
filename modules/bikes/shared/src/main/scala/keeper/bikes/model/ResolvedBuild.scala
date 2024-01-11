@@ -1,12 +1,11 @@
 package keeper.bikes.model
 
 import java.time.Instant
-
 import cats.Monad
 import cats.data.{EitherT, NonEmptyList}
 import cats.syntax.all.*
-
 import keeper.bikes.data.{ComponentWithProduct, DeviceWithBrand}
+import keeper.common.Distance
 import keeper.core.{ComponentId, DeviceBuild, DeviceId}
 
 final private case class ResolvedBuild(
@@ -22,6 +21,13 @@ final private case class ResolvedBuild(
 
   def getBike(id: DeviceId): Option[Bike] =
     devices.get(id).map(toBike)
+
+  def initialTotals: Map[ComponentId, Distance] = {
+    val x = topLevel.values.flatMap(_.map(c => c.id -> c.component.initialDistance))
+    val y = subComponents.values.flatMap(_.map(c => c.id -> c.component.initialDistance))
+
+    (x ++ y).filter(_._2 > Distance.zero).toMap
+  }
 
   private def toBike(e: DeviceWithBrand): Bike =
     Bike(

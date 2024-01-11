@@ -65,3 +65,6 @@ object ConfigurationCache:
        limit 1
        """
       .query(codec)
+
+  val deleteAll: Command[Void] =
+    sql"delete from configuration_cache".command

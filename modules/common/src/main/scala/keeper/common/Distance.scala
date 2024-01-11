@@ -42,3 +42,4 @@ object Distance:
     def *(factor: Double): Distance = self * factor
     def +(other: Distance): Distance = self + other
     def -(other: Distance): Distance = self - other
+    def >(other: Distance): Boolean = self > other

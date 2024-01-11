@@ -69,6 +69,9 @@ final class BikeRoutes[F[_]: Sync](
     case POST -> Root / "service" / "gencache" =>
       shop.serviceBook.generateMissingCacheEntries.flatMap(_ => NoContent())
 
+    case POST -> Root / "service" / "reset-cache" =>
+      shop.serviceBook.resetCache.flatMap(_ => NoContent())
+
     case GET -> Root / "distances" :? atVar(at) =>
       at.withValid { ts =>
         for {

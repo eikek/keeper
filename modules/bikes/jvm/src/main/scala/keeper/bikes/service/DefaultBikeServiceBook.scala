@@ -17,6 +17,9 @@ final class DefaultBikeServiceBook[F[_]: Sync](
   def generateMissingCacheEntries: F[Unit] =
     repo.generateMissingCache
 
+  def resetCache: F[Unit] =
+    repo.recreateCache
+
   def getServiceDetail(mask: ServiceSearchMask): fs2.Stream[F, ServiceDetail] =
     repo.getServiceDetails(mask)
 

@@ -1,18 +1,15 @@
 package keeper.bikes.db.postgres
 
 import java.time.Instant
-
-import cats.effect.{Resource, Sync}
+import cats.effect.{Clock, Resource, Sync}
 import cats.syntax.all.*
 import fs2.Stream
-
 import keeper.bikes.Page
 import keeper.bikes.db.MaintenanceRepository
-import keeper.bikes.model._
+import keeper.bikes.model.*
 import keeper.bikes.service.TranslatedEvent
 import keeper.common.Distance
 import keeper.core.*
-
 import skunk.data.Completion
 import skunk.{Session, Void}
 
@@ -97,7 +94,7 @@ final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]]
   def maintenanceFromLatestCached: F[(MaintenanceBuild, Stream[F, Maintenance])] =
     findLatestCachedBuild(None).flatMap {
       case None =>
-        maintenanceZero.map(b => (b, allMaintenances))
+        Clock[F].realTimeInstant.flatMap(maintenanceZero).map(b => (b, allMaintenances))
 
       case Some(start) =>
         val stream = Stream
@@ -108,11 +105,11 @@ final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]]
         (start, stream).pure[F]
     }
 
-  def maintenanceZero: F[MaintenanceBuild] =
-    initialTotals.map(t => MaintenanceBuild.empty(MaintenanceId(-1), t))
+  def maintenanceZero(at: Instant): F[MaintenanceBuild] =
+    initialTotals(at).map(t => MaintenanceBuild.empty(MaintenanceId(-1), t))
 
-  private def initialTotals: F[Map[ComponentId, TotalOutput]] = {
-    val f = ComponentSql.findInitialTotals(Nil)
+  private def initialTotals(at: Instant): F[Map[ComponentId, TotalOutput]] = {
+    val f = ComponentSql.findInitialTotals(at, Nil)
     val q = f.fragment.query(Codecs.componentId ~ Codecs.totalOutput)
     session.use(s => s.execute(q)(f.argument)).map(_.toMap)
   }
@@ -122,7 +119,7 @@ final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]]
   ): F[(MaintenanceBuild, Stream[F, Maintenance])] =
     findLatestCachedBuild(Some(at)).flatMap {
       case None =>
-        maintenanceZero.map(b => (b, allMaintenancesUntil(at)))
+        maintenanceZero(at).map(b => (b, allMaintenancesUntil(at)))
 
       case Some(start) =>
         val stream = Stream
@@ -189,4 +186,9 @@ final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]]
           .compile
           .drain
       }
+
+  def recreateCache: F[Unit] =
+    session.use(s =>
+      s.transaction.use(_ => s.execute(ConfigurationCache.deleteAll))
+    ) >> generateMissingCache
 }

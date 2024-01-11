@@ -28,7 +28,14 @@ final class BikesResolve[F[_]: Monad](source: ComponentSource[F]) {
       rws <- EitherT.right(allRearWheels(at, resolvedBuild))
       fws <- EitherT.right(allFrontWheels(at, resolvedBuild))
       forks <- EitherT.right(allForks(at, resolvedBuild))
-    } yield BikeBuilds(bikes, rws.toList, fws.toList, forks.toList, Nil, Map.empty)
+    } yield BikeBuilds(
+      bikes,
+      rws.toList,
+      fws.toList,
+      forks.toList,
+      Nil,
+      Map.empty // resolvedBuild.initialTotals
+    )
 
   private def allForks(at: Instant, resolvedBuild: ResolvedBuild) =
     allConfiguredComponents(

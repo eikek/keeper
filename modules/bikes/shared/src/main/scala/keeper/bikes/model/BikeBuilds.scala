@@ -1,6 +1,7 @@
 package keeper.bikes.model
 
 import cats.kernel.Eq
+import cats.syntax.all.*
 
 import keeper.common.Distance
 import keeper.common.borer.BaseCodec.given
@@ -27,6 +28,12 @@ final case class BikeBuilds(
     bikeTotals.find(_.bikeId == id).map(_.distance)
   def compTotal(id: ComponentId): Option[Distance] = componentTotals.get(id)
 
+  def addComponentTotals(more: Map[ComponentId, Distance]): BikeBuilds =
+    copy(componentTotals = (componentTotals.keys ++ more.keys).foldLeft(componentTotals) {
+      (totals, key) =>
+        componentTotals.updatedWith(key)(dstOpt => dstOpt |+| more.get(key))
+    })
+
 object BikeBuilds:
   given Encoder[BikeBuilds] = deriveEncoder
   given Decoder[BikeBuilds] = deriveDecoder
@@ -50,6 +57,9 @@ object BikeBuilds:
     Lens[BikeBuilds, Map[ComponentId, Distance]](_.componentTotals)(a =>
       _.copy(componentTotals = a)
     )
+
+  def addComponentTotals(more: Map[ComponentId, Distance]): BikeBuilds => BikeBuilds =
+    _.addComponentTotals(more)
 
   val bikeTotals: Lens[BikeBuilds, List[BikeTotal]] =
     Lens[BikeBuilds, List[BikeTotal]](_.bikeTotals)(a => _.copy(bikeTotals = a))

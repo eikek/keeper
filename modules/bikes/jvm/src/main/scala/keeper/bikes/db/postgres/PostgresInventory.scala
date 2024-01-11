@@ -40,16 +40,6 @@ final class PostgresInventory[F[_]: Sync: NonEmptyParallel](
 
   val resolver = new BikesResolve[F](componentSource)
 
-  def getCurrentBuilds: F[MaintenanceBuild] =
-    maintenance.maintenanceFromLatestCached.flatMap { (start, maintenances) =>
-      OptionT(
-        maintenances
-          .through(ConfigBuilder.build(start))
-          .compile
-          .last
-      ).getOrElseF(maintenance.maintenanceZero)
-    }
-
   def getCurrentBikes(
       currentTotals: List[BikeTotal]
   ): F[Either[BikesResolveError, BikeBuilds]] =
@@ -63,7 +53,7 @@ final class PostgresInventory[F[_]: Sync: NonEmptyParallel](
             .through(ConfigBuilder.build(start))
             .compile
             .last
-        ).getOrElseF(maintenance.maintenanceZero)
+        ).getOrElseF(maintenance.maintenanceZero(at))
       }
 
   def getBikesAt(
@@ -82,8 +72,8 @@ final class PostgresInventory[F[_]: Sync: NonEmptyParallel](
         .mapValues(_.toDistance)
         .toMap
 
-      modify = BikeBuilds.componentTotals
-        .replace(totals)
+      modify = BikeBuilds
+        .addComponentTotals(totals)
         .andThen(BikeBuilds.bikeTotals.replace(currentTotals))
     } yield modify(resolved)).value
 

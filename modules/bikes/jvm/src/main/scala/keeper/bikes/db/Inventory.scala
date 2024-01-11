@@ -18,8 +18,6 @@ trait Inventory[F[_]] {
 
   def devices: DeviceRepository[F]
 
-  def getCurrentBuilds: F[MaintenanceBuild]
-
   def getBuildsAt(at: Instant): F[MaintenanceBuild]
 
   def getCurrentBikes(

@@ -164,18 +164,18 @@ object ComponentSql {
       .query(c.componentWithProduct)
       .contramap[(Instant, List[ComponentType])](t => ((t._1, t._1), t._2))
 
-  def findInitialTotals(includes: List[ComponentId]): AppliedFragment = {
+  def findInitialTotals(at: Instant, includes: List[ComponentId]): AppliedFragment = {
     val query =
       sql"""
         select id, initial_total
-        from component
-        where initial_total > 0
+        from component c
+        where $whereAt AND c.initial_total > 0
         """
 
     val where = includes match
       case Nil => AppliedFragment.empty
-      case ids => sql" AND id in ${c.componentId.list(ids).values}".apply(ids)
+      case ids => sql" AND c.id in ${c.componentId.list(ids).values}".apply(ids)
 
-    query(Void) |+| where
+    query(at -> at) |+| where
   }
 }
