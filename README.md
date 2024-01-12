@@ -16,8 +16,9 @@ from Strava or [Fit4S](https://github.com/eikek/fit4s).
 
 ## Building
 
-[sbt](https://scala-sbt.org) is used to build the app. Use the
-`make-cli.sh` script to create a zip package in one go.
+[sbt](https://scala-sbt.org) and [npm](https://npmjs.com) is required
+to build the app. Use the `make-cli.sh` script to create a zip package
+in one go.
 
 ## Usage
 
@@ -31,18 +32,24 @@ when the component arrived at your inventory.
 After this process, you can create bikes by configuring them using
 components from your inventory. The date you select for your new bike
 day specifies which components are available for configuration. Bike
-creation only selects components that have been added _before_. Then
-you can do maintenances. A maintenance consists of possibly many
-"maintenance events" like changing tires, swapping a chain etc.
+creation only selects components that have been added before the
+creation date of your bike. Then you can do maintenances. A
+maintenance consists of possibly many "maintenance events" like
+changing tires, swapping a chain etc.
 
 A maintenance is added to a "maintenance log" that shows every
 modification and allows for some querying. You can select a date up to
-which the maintenance log is rendered, allowing to go back in time.
+which the maintenance log is rendered, allowing to go back in time and
+see previous configurations of your bikes.
+
+Since keeper maintains a simple structure of the bike builds (a tire
+is mounted on a wheel, a brake on the fork etc), it can calculate
+travelled distances of sub-components. For example, if you change
+wheels, the tires and cassette will go with them automatically and
+distances will be tracked on those depending on where the wheel
+currently is.
 
 ## Tech Stack
-
-The core library only implements the FIT codec using the scodec
-library. The CLI application uses more libraries:
 
 - [Scala 3](https://scala-lang.org) all the way, [Scala.js](https://www.scala-js.org/) for the web frontend
 - based on [cats-effect](https://github.com/typelevel/cats-effect) and [fs2](https://github.com/typelevel/fs2)
