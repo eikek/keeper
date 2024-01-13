@@ -39,6 +39,13 @@ A maintenance is added to a "maintenance log" that shows every
 modification and allows for some querying. You can select a date up to
 which the maintenance log is rendered, allowing to go back in time.
 
+## Configuration
+
+Configuration is done via environment variables. Run `keeper-cli
+config list-defaults` to see the list of variables available and their
+default value. With `keeper-cli config show-current` you can see the
+currently applied configuration.
+
 ## Tech Stack
 
 The core library only implements the FIT codec using the scodec
