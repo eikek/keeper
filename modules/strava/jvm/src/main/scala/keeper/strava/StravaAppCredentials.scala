@@ -8,7 +8,5 @@ final case class StravaAppCredentials(
     clientSecret: String
 )
 
-object StravaAppCredentials {
-
+object StravaAppCredentials:
   given Encoder[StravaAppCredentials] = deriveEncoder
-}

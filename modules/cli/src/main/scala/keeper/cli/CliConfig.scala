@@ -11,6 +11,11 @@ import keeper.bikes.db.PostgresConfig
 import keeper.bikes.fit4s.Fit4sConfig
 import keeper.bikes.strava.StravaConfig
 import keeper.cli.config.LoggingConfig
+import keeper.common.borer.BaseCodec.given
+
+import io.bullet.borer.Encoder
+import io.bullet.borer.NullOptions.*
+import io.bullet.borer.derivation.MapBasedCodecs.*
 
 final case class CliConfig(
     timezone: ZoneId,
@@ -34,3 +39,5 @@ object CliConfig:
 
   def load[F[_]: Async]: F[CliConfig] =
     cfg[F].load[F]
+
+  given Encoder[CliConfig] = deriveEncoder

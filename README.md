@@ -49,6 +49,13 @@ wheels, the tires and cassette will go with them automatically and
 distances will be tracked on those depending on where the wheel
 currently is.
 
+## Configuration
+
+Configuration is done via environment variables. Run `keeper-cli
+config list-defaults` to see the list of variables available and their
+default value. With `keeper-cli config show-current` you can see the
+currently applied configuration.
+
 ## Tech Stack
 
 - [Scala 3](https://scala-lang.org) all the way, [Scala.js](https://www.scala-js.org/) for the web frontend

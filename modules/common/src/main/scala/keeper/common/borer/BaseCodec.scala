@@ -1,7 +1,8 @@
 package keeper.common.borer
 
-import java.time.Instant
+import java.time.{Instant, ZoneId}
 
+import scala.concurrent.duration.Duration
 import scala.util.Try
 
 import cats.Order
@@ -35,6 +36,10 @@ trait BaseCodec {
 
   given _mapDecoder[A: Decoder, B: Decoder]: Decoder[Map[A, B]] =
     Decoder[List[(A, B)]].map(_.toMap)
+
+  given Encoder[Duration] = Encoder.forString.contramap(_.toString)
+
+  given Encoder[ZoneId] = Encoder.forString.contramap(_.getId())
 }
 
 object BaseCodec extends BaseCodec:

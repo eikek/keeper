@@ -14,6 +14,9 @@ object App
   private val versionOpts: Opts[VersionCmd.Options] =
     Opts.subcommand("version", "Show version information")(VersionCmd.opts)
 
+  private val configOpts: Opts[ConfigCmd.SubOpts] =
+    Opts.subcommand("config", "Show default and applied configuration")(ConfigCmd.opts)
+
   private val serverOpts: Opts[ServerCmd.SubOpts] =
     Opts.subcommand("server", "Webview server")(ServerCmd.opts)
 
@@ -21,6 +24,7 @@ object App
     versionOpts
       .map(SubCommandOpts.Version.apply)
       .orElse(serverOpts.map(SubCommandOpts.Server.apply))
+      .orElse(configOpts.map(SubCommandOpts.Config.apply))
 
   def main: Opts[IO[ExitCode]] =
     subCommandOpts.map(run).map(printError)
@@ -33,11 +37,13 @@ object App
         opts match
           case SubCommandOpts.Version(c) => VersionCmd(c)
           case SubCommandOpts.Server(c)  => ServerCmd(cliCfg, c)
+          case SubCommandOpts.Config(c)  => ConfigCmd(cliCfg, c)
       }
 
   enum SubCommandOpts:
     case Version(opts: VersionCmd.Options)
     case Server(opts: ServerCmd.SubOpts)
+    case Config(opts: ConfigCmd.SubOpts)
 
   private def printError(io: IO[ExitCode]): IO[ExitCode] =
     io.attempt.flatMap {
