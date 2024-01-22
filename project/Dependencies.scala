@@ -34,7 +34,7 @@ object Dependencies {
     val scalaJsTime = "2.5.0"
     val scribeSlf4j = "3.13.0"
     val scribe = "3.13.0"
-    val skunk = "1.1.0-M2"
+    val skunk = "1.1.0-M3"
   }
 
   val doodle = Def.setting(
