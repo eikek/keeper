@@ -38,8 +38,7 @@ final private class ServiceEventMapper(typeInfo: TypeInfo[Id, ComponentType]) {
     val (last, tes) = builders.foldLeft(current -> List.empty[TranslatedEvent]) {
       case ((state, res), (ev, builder)) =>
         val (nextState, mainEvents) = builder.run(state)
-        val te = TranslatedEvent(ev, mainEvents, nextState)
-        (nextState, te :: res)
+        val te = TranslatedEvent(ev, mainEvents, nextState)(nextState, te :: res)
     }
     (last, updateIndex(tes.reverse))
 

@@ -104,8 +104,8 @@ final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]]
           .resource(session)
           .evalMap(_.prepare(MaintenanceSql.maintenanceWithTotalsAfter))
           .flatMap(_.stream(start.maintenance.id, 100))
-          .through(groupEvents)
-        (start, stream).pure[F]
+          .through(groupEvents)(start, stream)
+          .pure[F]
     }
 
   def maintenanceZero: F[MaintenanceBuild] =
@@ -129,8 +129,8 @@ final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]]
           .resource(session)
           .evalMap(_.prepare(MaintenanceSql.maintenanceWithTotalsBetween))
           .flatMap(_.stream(at -> start.maintenance.id, 100))
-          .through(groupEvents)
-        (start, stream).pure[F]
+          .through(groupEvents)(start, stream)
+          .pure[F]
     }
 
   private def groupEvents(

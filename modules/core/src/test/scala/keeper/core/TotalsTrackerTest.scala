@@ -50,8 +50,7 @@ class TotalsTrackerTest extends FunSuite with TestData {
     val tt =
       events.scanLeft((TotalsTracker.empty(Map.empty), DeviceBuild.empty)) {
         case ((tracker, build), m) =>
-          val next = m.applyTo(build)
-          (tracker.record(next, m.totals), next)
+          val next = m.applyTo(build)(tracker.record(next, m.totals), next)
       }
 
     assertEquals(
