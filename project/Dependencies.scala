@@ -6,17 +6,17 @@ object Dependencies {
 
   object V {
     val scala2 = "2.13.10"
-    val scala3 = "3.3.1"
+    val scala3 = "3.3.3"
 
     val borer = "1.13.0"
-    val catsEffect = "3.5.3"
+    val catsEffect = "3.5.4"
     val catsParse = "1.0.0"
     val calico = "0.2.2"
     val ciris = "3.5.0"
     val decline = "2.4.1"
     val doodle = "0.20.0"
     val doobie = "1.0.0-RC5"
-    val http4s = "0.23.25"
+    val http4s = "0.23.26"
     val http4sDom = "0.2.11"
     val flyway = "10.0.1"
     val h2 = "2.2.224"
