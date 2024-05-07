@@ -12,7 +12,7 @@ object Dependencies {
     val catsEffect = "3.5.4"
     val catsParse = "1.0.0"
     val calico = "0.2.2"
-    val ciris = "3.5.0"
+    val ciris = "3.6.0"
     val decline = "2.4.1"
     val doodle = "0.20.0"
     val doobie = "1.0.0-RC5"
