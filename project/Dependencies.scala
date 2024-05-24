@@ -22,7 +22,7 @@ object Dependencies {
     val h2 = "2.2.224"
     val monocle = "3.2.0"
     val munit = "0.7.29"
-    val munitCatsEffect = "1.0.7"
+    val munitCatsEffect = "2.0.0"
     val scodec1 = "1.11.10"
     val scodec2 = "2.2.2"
     val catsCore = "2.9.0"
@@ -196,6 +196,6 @@ object Dependencies {
   val munit = Seq(
     "org.scalameta" %% "munit" % V.munit,
     "org.scalameta" %% "munit-scalacheck" % V.munit,
-    "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffect
+    "org.typelevel" %% "munit-cats-effect" % V.munitCatsEffect
   )
 }
