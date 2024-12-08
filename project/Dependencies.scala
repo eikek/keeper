@@ -9,31 +9,31 @@ object Dependencies {
     val scala3 = "3.3.3"
 
     val borer = "1.13.0"
-    val catsEffect = "3.5.4"
+    val catsEffect = "3.5.5"
     val catsParse = "1.0.0"
     val calico = "0.2.2"
     val ciris = "3.6.0"
     val decline = "2.4.1"
     val doodle = "0.20.0"
     val doobie = "1.0.0-RC5"
-    val http4s = "0.23.27"
+    val http4s = "0.23.29"
     val http4sDom = "0.2.11"
     val flyway = "10.0.1"
     val h2 = "2.2.224"
-    val monocle = "3.2.0"
-    val munit = "0.7.29"
-    val munitCatsEffect = "1.0.7"
+    val monocle = "3.3.0"
+    val munit = "1.0.0"
+    val munitCatsEffect = "2.0.0"
     val scodec1 = "1.11.10"
     val scodec2 = "2.2.2"
     val catsCore = "2.9.0"
-    val fs2 = "3.10.2"
+    val fs2 = "3.11.0"
     val scalaCheck = "1.17.0"
     val scalaCsv = "1.3.10"
     val postgres = "42.7.0"
     val scalaJsDom = "2.8.0"
-    val scalaJsTime = "2.5.0"
-    val scribeSlf4j = "3.13.5"
-    val scribe = "3.13.5"
+    val scalaJsTime = "2.6.0"
+    val scribeSlf4j = "3.15.1"
+    val scribe = "3.15.1"
     val skunk = "1.1.0-M3"
   }
 
@@ -196,6 +196,6 @@ object Dependencies {
   val munit = Seq(
     "org.scalameta" %% "munit" % V.munit,
     "org.scalameta" %% "munit-scalacheck" % V.munit,
-    "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffect
+    "org.typelevel" %% "munit-cats-effect" % V.munitCatsEffect
   )
 }
