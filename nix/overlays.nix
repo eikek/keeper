@@ -1,8 +1,7 @@
 {
-
   # Make sure sbt is run with jdk19
   sbt = self: super: {
-    sbt = super.sbt.override { jre = super.openjdk19; };
+    sbt = super.sbt.override {jre = super.openjdk19;};
   };
 
   # A simple startup script for postgresql running in foreground.
