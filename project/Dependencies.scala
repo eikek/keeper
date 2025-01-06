@@ -13,7 +13,7 @@ object Dependencies {
     val catsParse = "1.1.0"
     val calico = "0.2.3"
     val ciris = "3.7.0"
-    val decline = "2.4.1"
+    val decline = "2.5.0"
     val doodle = "0.20.0"
     val doobie = "1.0.0-RC5"
     val http4s = "0.23.30"
