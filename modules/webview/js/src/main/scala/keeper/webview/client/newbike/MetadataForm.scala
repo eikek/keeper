@@ -55,9 +55,8 @@ object MetadataForm {
               required := true,
               onInput --> Action
                 .eval(
-                  in.value.get.flatMap(str =>
-                    model.update(MetadataModel.name.replace(str))
-                  )
+                  in.value.get
+                    .flatMap(str => model.update(MetadataModel.name.replace(str)))
                 )
                 .pipe
             )
@@ -84,9 +83,8 @@ object MetadataForm {
                 value <-- model.map(MetadataModel.date.get).changes,
                 onInput --> Action
                   .eval(
-                    in.value.get.flatMap(str =>
-                      model.update(MetadataModel.date.replace(str))
-                    )
+                    in.value.get
+                      .flatMap(str => model.update(MetadataModel.date.replace(str)))
                   )
                   .pipe
               )
@@ -100,9 +98,8 @@ object MetadataForm {
                 value <-- model.map(MetadataModel.time.get).changes,
                 onInput --> Action
                   .eval(
-                    in.value.get.flatMap(str =>
-                      model.update(MetadataModel.time.replace(str))
-                    )
+                    in.value.get
+                      .flatMap(str => model.update(MetadataModel.time.replace(str)))
                   )
                   .pipe
               )
@@ -141,9 +138,8 @@ object MetadataForm {
               idAttr := "input-description",
               onInput --> Action
                 .eval(
-                  in.value.get.flatMap(str =>
-                    model.update(MetadataModel.description.replace(str))
-                  )
+                  in.value.get
+                    .flatMap(str => model.update(MetadataModel.description.replace(str)))
                 )
                 .pipe
             )
