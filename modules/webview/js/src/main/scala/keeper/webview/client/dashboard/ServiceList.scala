@@ -195,8 +195,7 @@ object ServiceList {
         case ActionName.Cease =>
           Css("text-red-400 font-semibold")
         case _ =>
-          Css.none
-      ),
+          Css.none),
       an match
         case ActionName.Cease =>
           span(cls := "fa fa-skull-crossbones mr-1")
