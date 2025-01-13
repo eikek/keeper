@@ -130,8 +130,7 @@ object DeviceBuilder:
         case _                    => doNothing
     } yield next
 
-  /** Remove the sub-component from its parent if it is on a different one that specified.
-    */
+  /** Remove the sub-component from its parent if it is on a different one that specified. */
   def unmountFromOtherComponent[F[_]: Monad](
       component: ComponentId,
       sub: ComponentId
