@@ -59,9 +59,8 @@ object ComponentForm {
               value <-- model.map(FormModel.addedAt.get).changes,
               onInput --> Action
                 .eval(
-                  in.value.get.flatMap(str =>
-                    model.update(FormModel.addedAt.replace(str))
-                  )
+                  in.value.get
+                    .flatMap(str => model.update(FormModel.addedAt.replace(str)))
                 )
                 .pipe
             )
@@ -100,9 +99,8 @@ object ComponentForm {
               idAttr := "input-total",
               onInput --> Action
                 .eval(
-                  in.value.get.flatMap(str =>
-                    model.update(FormModel.initialTotal.replace(str))
-                  )
+                  in.value.get
+                    .flatMap(str => model.update(FormModel.initialTotal.replace(str)))
                 )
                 .pipe
             )
@@ -119,9 +117,8 @@ object ComponentForm {
               idAttr := "input-description",
               onInput --> Action
                 .eval(
-                  in.value.get.flatMap(str =>
-                    model.update(FormModel.description.replace(str))
-                  )
+                  in.value.get
+                    .flatMap(str => model.update(FormModel.description.replace(str)))
                 )
                 .pipe
             )
