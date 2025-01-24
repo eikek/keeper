@@ -62,9 +62,8 @@ object BrandForm {
               idAttr := "input-description",
               onInput --> Action
                 .eval(
-                  in.value.get.flatMap(str =>
-                    model.update(FormModel.description.replace(str))
-                  )
+                  in.value.get
+                    .flatMap(str => model.update(FormModel.description.replace(str)))
                 )
                 .pipe
             )
