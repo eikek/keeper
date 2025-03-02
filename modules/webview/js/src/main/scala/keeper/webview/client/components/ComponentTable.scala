@@ -19,7 +19,7 @@ import calico.html.io.{*, given}
 import org.scalajs.dom.KeyValue
 
 object ComponentTable {
-  private[this] val logger = scribe.cats.io
+  private val logger = scribe.cats.io
 
   def render(
       model: SignallingRef[IO, TableModel],

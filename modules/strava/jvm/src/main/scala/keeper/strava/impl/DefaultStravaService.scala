@@ -20,7 +20,7 @@ final class DefaultStravaService[F[_]: Sync](
     client: StravaClient[F],
     tokenStore: TokenStore[F]
 ) extends StravaService[F] {
-  private[this] val logger = scribe.cats.effect[F]
+  private val logger = scribe.cats.effect[F]
 
   def createAuthUrl(
       redirectUrl: String,

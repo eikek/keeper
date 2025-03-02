@@ -20,7 +20,7 @@ final case class PatchModel(
   def asServiceEvent: ValidatedNel[String, ServiceEvent] =
     components.components.toList match
       case Nil    => "You need to select at least one tube".invalidNel
-      case h :: t => mkEvent(NonEmptySet.of(h, t: _*)).validNel
+      case h :: t => mkEvent(NonEmptySet.of(h, t*)).validNel
 
   def reset: ServiceEventModel => ServiceEventModel =
     setSelf(PatchModel(eventName, mkEvent, setSelf))

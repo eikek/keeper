@@ -19,7 +19,7 @@ import keeper.webview.client.util.Action
 import calico.html.io.{*, given}
 
 object DashboardPage {
-  private[this] val logger = scribe.cats.io
+  private val logger = scribe.cats.io
 
   def render(
       client: KeeperClient[IO],

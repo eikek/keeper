@@ -22,7 +22,7 @@ final case class WaxChainModel(
     chains.components.toList match
       case Nil => "You need to select at least one chain".invalidNel
       case h :: t =>
-        ServiceEvent.WaxChain(NonEmptySet.of(h, t: _*), waxType).validNel
+        ServiceEvent.WaxChain(NonEmptySet.of(h, t*), waxType).validNel
 
   def reset: ServiceEventModel => ServiceEventModel =
     ServiceEventModel.waxChain.replace(WaxChainModel())

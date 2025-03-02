@@ -1,6 +1,6 @@
 package keeper.webview.client.shared
 
-import cats.effect.{IO, Resource}
+import cats.effect.IO
 import fs2.concurrent.SignallingRef
 
 import keeper.webview.client.util.Action

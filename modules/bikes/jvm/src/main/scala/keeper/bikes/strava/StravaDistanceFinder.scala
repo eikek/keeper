@@ -15,7 +15,7 @@ import keeper.strava.StravaService
 final class StravaDistanceFinder[F[_]: Sync](
     client: StravaService[F]
 ) extends DistanceFinder[F] {
-  private[this] val logger = scribe.cats.effect[F]
+  private val logger = scribe.cats.effect[F]
 
   def findDistanceAt(date: Instant, bikes: List[Device]): F[Option[List[BikeTotal]]] =
     DateUtil.isCurrent(date, delta = Duration.ofHours(24)).flatMap {

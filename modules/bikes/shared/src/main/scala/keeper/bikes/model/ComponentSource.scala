@@ -72,4 +72,4 @@ object ComponentSource:
         ft(cts).pure[F]
 
   given componentSourceMonoid[F[_]: Monad]: Monoid[ComponentSource[F]] =
-    Monoid.instance(empty[F], _ andThen _)
+    Monoid.instance(empty[F], _.andThen(_))

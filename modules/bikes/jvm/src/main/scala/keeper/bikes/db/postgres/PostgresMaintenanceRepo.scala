@@ -18,7 +18,7 @@ import skunk.{Session, Void}
 
 final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]])
     extends MaintenanceRepository[F] {
-  private[this] val logger = scribe.cats.effect[F]
+  private val logger = scribe.cats.effect[F]
 
   def getServiceDetails(search: ServiceSearchMask): Stream[F, ServiceDetail] = {
     val frag = SearchSql.searchQueryFragment(search)
@@ -163,7 +163,7 @@ final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]]
     for {
       events <- s.execute(MaintenanceSql.maintenanceEventsFor)(mid)
       totals <- s.execute(MaintenanceSql.selectTotals)(mid)
-    } yield Maintenance(mid, DeviceTotals(totals: _*), events.flatMap(_.toConfigEvent))
+    } yield Maintenance(mid, DeviceTotals(totals*), events.flatMap(_.toConfigEvent))
 
   private def loadMaintenance(mid: MaintenanceId, totals: DeviceTotals): F[Maintenance] =
     session
@@ -174,7 +174,7 @@ final class PostgresMaintenanceRepo[F[_]: Sync](session: Resource[F, Session[F]]
       chunk: List[(MaintenanceId, Option[DeviceId], Option[TotalOutput])]
   ) =
     DeviceTotals(
-      chunk.flatMap(t => t._2.flatMap(id => t._3.map(t => id -> t))): _*
+      chunk.flatMap(t => t._2.flatMap(id => t._3.map(t => id -> t)))*
     )
 
   def generateMissingCache: F[Unit] =

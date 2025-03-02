@@ -25,8 +25,8 @@ import calico.html.io.{*, given}
 import org.http4s.dom.FetchClientBuilder
 
 object KeeperApp extends IOWebApp {
-  private[this] val logger = scribe.Logger("KeeperApp")
-  // private[this] val loggerF = scribe.cats.io
+  private val logger = scribe.Logger("KeeperApp")
+  // private val loggerF = scribe.cats.io
 
   val zoneId: ZoneId =
     try ZoneId.systemDefault()

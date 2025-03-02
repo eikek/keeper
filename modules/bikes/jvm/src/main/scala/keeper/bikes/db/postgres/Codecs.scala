@@ -113,7 +113,7 @@ object Codecs {
     c._varchar.eimap(_.traverse(ServiceEventName.fromName))(_.map(_.name))
 
   val serviceEventNameSet: Codec[Set[ServiceEventName]] =
-    serviceEventNameArr.imap(_.toList.toSet)(e => Arr(e.toList: _*))
+    serviceEventNameArr.imap(_.toList.toSet)(e => Arr(e.toList*))
 
   val stravaAccessToken: Codec[StravaAccessToken] =
     c.text.imap(StravaAccessToken.apply)(_.token)

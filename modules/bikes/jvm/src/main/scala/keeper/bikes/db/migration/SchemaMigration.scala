@@ -7,7 +7,7 @@ import fs2.Stream
 import skunk.Session
 
 final class SchemaMigration[F[_]: Sync](session: Session[F], changeSets: Seq[ChangeSet]) {
-  private[this] val logger = scribe.cats.effect[F]
+  private val logger = scribe.cats.effect[F]
   private val createHistoryTable =
     session.execute(DbSchemaHistory.createTable)
 

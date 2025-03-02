@@ -2,7 +2,7 @@ package keeper.bikes
 
 import cats.NonEmptyParallel
 import cats.effect.std.Console
-import cats.effect.{Async, Resource, Temporal}
+import cats.effect.{Async, Resource}
 import fs2.io.file.Files
 import fs2.io.net.Network
 
@@ -23,6 +23,6 @@ trait BikeShop[F[_]] {
 }
 
 object BikeShop:
-  def resource[F[_]: Tracer: Network: Console: Temporal: Async: NonEmptyParallel: Files](
+  def resource[F[_]: Tracer: Network: Console: Async: NonEmptyParallel: Files](
       cfg: Config
   ): Resource[F, BikeShop[F]] = KeeperBikeShop[F](cfg)

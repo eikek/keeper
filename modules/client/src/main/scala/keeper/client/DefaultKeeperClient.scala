@@ -23,7 +23,7 @@ import org.http4s.{ProductId as _, *}
 final class DefaultKeeperClient[F[_]: Async](client: Client[F], baseUrl: Uri)
     extends MoreClientDsl[F]
     with KeeperClient[F] {
-  private[this] val logger = scribe.cats.effect[F]
+  private val logger = scribe.cats.effect[F]
 
   def getStravaConnectState: F[FetchResult[StravaConnectState]] =
     expect[StravaConnectState](Method.GET(baseUrl / "strava"))
@@ -133,7 +133,7 @@ final class DefaultKeeperClient[F[_]: Async](client: Client[F], baseUrl: Uri)
     val r = if (d.consumes.nonEmpty) {
       val m = d.consumes.toList
       req.addHeader(
-        Accept(MediaRangeAndQValue(m.head), m.tail.map(MediaRangeAndQValue(_)): _*)
+        Accept(MediaRangeAndQValue(m.head), m.tail.map(MediaRangeAndQValue(_))*)
       )
     } else req
 

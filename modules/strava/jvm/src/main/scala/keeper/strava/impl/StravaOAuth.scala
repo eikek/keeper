@@ -27,7 +27,7 @@ final class StravaOAuth[F[_]: Async: Network](
     client: Client[F]
 ) {
 
-  private[this] val logger = scribe.cats[F]
+  private val logger = scribe.cats[F]
 
   def authRequestUrl(
       cfg: StravaAppCredentials,
@@ -137,9 +137,6 @@ final class StravaOAuth[F[_]: Async: Network](
       cfg: StravaAppCredentials,
       state: String
   )(req: Request[F]): F[Either[String, TokenAndScope]] = {
-    val dsl = new Http4sDsl[F] {}
-    import dsl._
-
     val resp: F[Either[String, TokenAndScope]] =
       req.params.get("error") match {
         case Some(err) => s"Strava disallowed access: $err".asLeft[TokenAndScope].pure[F]
