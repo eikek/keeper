@@ -11,7 +11,7 @@ import keeper.bikes.data.{ComponentType, ComponentWithDevice}
 import keeper.bikes.event.{ServiceEvent, ServiceEventName}
 import keeper.bikes.model.{Bike, BikeBuilds}
 import keeper.common.Lenses.syntax.*
-import keeper.webview.client.icons._
+import keeper.webview.client.icons.*
 import keeper.webview.client.shared.Css
 import keeper.webview.client.util.{Action, ServiceEventLabel}
 

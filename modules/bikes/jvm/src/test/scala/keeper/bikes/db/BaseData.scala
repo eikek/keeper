@@ -1,6 +1,6 @@
 package keeper.bikes.db
 
-import keeper.bikes.data._
+import keeper.bikes.data.*
 
 case class BaseData(
     brands: BaseData.Brands,

@@ -11,7 +11,7 @@ import keeper.bikes.model.BikeBuilds
 import keeper.common.Lenses
 import keeper.common.Lenses.syntax.*
 import keeper.webview.client.icons.ComponentIcon
-import keeper.webview.client.shared._
+import keeper.webview.client.shared.*
 
 import calico.html.io.{*, given}
 

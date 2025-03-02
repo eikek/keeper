@@ -2,12 +2,12 @@ package keeper.strava
 
 import cats.data.NonEmptyList
 import cats.effect.Sync
-import cats.syntax.all._
+import cats.syntax.all.*
 
 import keeper.strava.data.StravaAccessToken
 
+import org.http4s.*
 import org.http4s.Status.Successful
-import org.http4s._
 import org.http4s.client.Client
 import org.http4s.headers.{Accept, Authorization, MediaRangeAndQValue}
 

@@ -10,7 +10,7 @@ import keeper.bikes.event.{ServiceEvent, ServiceEventName}
 import keeper.bikes.model.{BikeService, BikeServiceError}
 import keeper.common.Distance
 import keeper.core.{Maintenance as _, *}
-import keeper.strava.data._
+import keeper.strava.data.*
 
 import io.bullet.borer.{Decoder, Encoder, Json}
 import skunk.Codec

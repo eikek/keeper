@@ -1,6 +1,6 @@
 package keeper.strava.data
 
-import io.bullet.borer._
+import io.bullet.borer.*
 
 final class StravaAccessToken(val token: String) extends AnyVal {
   override def toString = "StravaAccessToken(***)"

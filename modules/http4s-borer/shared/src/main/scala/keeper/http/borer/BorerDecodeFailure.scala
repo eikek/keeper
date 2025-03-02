@@ -2,7 +2,7 @@ package keeper.http.borer
 
 import io.bullet.borer.derivation.MapBasedCodecs.*
 import io.bullet.borer.{Borer, Encoder}
-import org.http4s._
+import org.http4s.*
 
 final case class BorerDecodeFailure(respString: String, error: Borer.Error[?])
     extends DecodeFailure {

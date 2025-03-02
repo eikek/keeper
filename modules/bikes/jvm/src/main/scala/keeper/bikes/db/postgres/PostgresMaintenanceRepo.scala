@@ -8,7 +8,7 @@ import fs2.Stream
 
 import keeper.bikes.Page
 import keeper.bikes.db.MaintenanceRepository
-import keeper.bikes.model._
+import keeper.bikes.model.*
 import keeper.bikes.service.TranslatedEvent
 import keeper.common.Distance
 import keeper.core.*

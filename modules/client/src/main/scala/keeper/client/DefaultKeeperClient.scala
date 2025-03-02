@@ -11,7 +11,7 @@ import fs2.io.net.Network
 import keeper.bikes.Page
 import keeper.bikes.SimpleQuery
 import keeper.bikes.data.*
-import keeper.bikes.model._
+import keeper.bikes.model.*
 import keeper.client.data.*
 import keeper.core.ComponentId
 

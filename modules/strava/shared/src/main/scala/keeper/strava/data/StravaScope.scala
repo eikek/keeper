@@ -1,6 +1,6 @@
 package keeper.strava.data
 
-import io.bullet.borer._
+import io.bullet.borer.*
 
 final class StravaScope(raw: String) {
   val scopes = raw.split(',').map(_.trim.toLowerCase).filter(_.nonEmpty).toSet

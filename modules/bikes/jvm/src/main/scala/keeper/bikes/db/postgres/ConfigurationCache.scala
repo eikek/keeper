@@ -2,10 +2,10 @@ package keeper.bikes.db.postgres
 
 import java.time.Instant
 
+import keeper.core.*
 import keeper.core.TotalsTracker.EntryMap.given
-import keeper.core._
 
-import skunk._
+import skunk.*
 import skunk.codec.all as c
 import skunk.implicits.*
 

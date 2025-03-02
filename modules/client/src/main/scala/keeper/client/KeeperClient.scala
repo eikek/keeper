@@ -3,7 +3,7 @@ package keeper.client
 import java.time.Instant
 
 import keeper.bikes.data.*
-import keeper.bikes.model._
+import keeper.bikes.model.*
 import keeper.bikes.{Page, SimpleQuery}
 import keeper.client.data.{CreateResult, FetchResult, StravaConnectState}
 import keeper.core.ComponentId

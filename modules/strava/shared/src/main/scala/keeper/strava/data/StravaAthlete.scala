@@ -1,8 +1,8 @@
 package keeper.strava.data
 
+import io.bullet.borer.*
 import io.bullet.borer.NullOptions.given
-import io.bullet.borer._
-import io.bullet.borer.derivation.MapBasedCodecs._
+import io.bullet.borer.derivation.MapBasedCodecs.*
 
 final case class StravaAthlete(
     id: StravaAthleteId,

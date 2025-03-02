@@ -1,6 +1,6 @@
 package keeper.strava.data
 
-import io.bullet.borer._
+import io.bullet.borer.*
 import org.http4s.Uri
 
 final class StravaUploadId(val id: Long) extends AnyVal {

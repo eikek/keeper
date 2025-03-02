@@ -14,8 +14,8 @@ import keeper.strava.data.*
 import keeper.strava.{StravaAppCredentials, StravaClientConfig, data}
 
 import com.comcast.ip4s.{Host, Port}
+import org.http4s.*
 import org.http4s.Method.POST
-import org.http4s._
 import org.http4s.client.Client
 import org.http4s.client.dsl.Http4sClientDsl
 import org.http4s.dsl.Http4sDsl

@@ -4,7 +4,7 @@ import cats.Id
 import cats.data.NonEmptyList
 import cats.syntax.all.*
 
-import keeper.bikes.data._
+import keeper.bikes.data.*
 import keeper.bikes.event.ServiceEvent
 import keeper.bikes.event.ServiceEvent.WaxChain.WaxType
 import keeper.bikes.model.BikeServiceError
