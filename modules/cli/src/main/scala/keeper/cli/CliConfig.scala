@@ -14,7 +14,7 @@ import keeper.cli.config.LoggingConfig
 import keeper.common.borer.BaseCodec.given
 
 import io.bullet.borer.Encoder
-import io.bullet.borer.NullOptions.*
+import io.bullet.borer.NullOptions.given
 import io.bullet.borer.derivation.MapBasedCodecs.*
 
 final case class CliConfig(
