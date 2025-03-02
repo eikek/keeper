@@ -1,7 +1,7 @@
 {
   description = "keeper flake";
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.05";
+    nixpkgs.url = "nixpkgs/nixos-24.11";
     devshell-tools.url = "github:eikek/devshell-tools";
     sbt.url = "github:zaninime/sbt-derivation";
     sbt.inputs.nixpkgs.follows = "nixpkgs";
@@ -52,26 +52,21 @@
 
     devShells = forAllSystems (system: {
       default = let
-        overlays = import ./nix/overlays.nix;
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [
-            overlays.sbt
-            overlays.postgres-fg
-          ];
         };
       in
         pkgs.mkShell {
           buildInputs = [
-            pkgs.sbt
+            devshell-tools.packages.${system}.sbt21
+            devshell-tools.packages.${system}.postgres-fg
             pkgs.openjdk
             pkgs.nodejs
-            pkgs.postgres-fg
           ];
           nativeBuildInputs = [
           ];
 
-          JAVA_HOME = "${pkgs.openjdk19}/lib/openjdk";
+          JAVA_HOME = "${pkgs.openjdk21}/lib/openjdk";
           KEEPER_POSTGRES_DATABASE = "keeper_dev";
           KEEPER_POSTGRES_USER = "dev";
           KEEPER_POSTGRES_PASSWORD = "dev";
