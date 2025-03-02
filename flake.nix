@@ -50,29 +50,36 @@
       keeper-dev = pkgs.keeper-dev;
     });
 
-    devShells = forAllSystems (system: {
-      default = let
-        pkgs = import nixpkgs {
-          inherit system;
-        };
-      in
-        pkgs.mkShell {
-          buildInputs = [
-            devshell-tools.packages.${system}.sbt21
-            devshell-tools.packages.${system}.postgres-fg
-            pkgs.openjdk
-            pkgs.nodejs
-          ];
-          nativeBuildInputs = [
-          ];
+    devShells = forAllSystems (system: let
+      pkgs = import nixpkgs {
+        inherit system;
+      };
+    in {
+      ci = pkgs.mkShellNoCC {
+        buildInputs = [
+          devshell-tools.packages.${system}.sbt21
+          devshell-tools.packages.${system}.postgres-fg
+          pkgs.openjdk
+          pkgs.nodejs
+        ];
+      };
+      default = pkgs.mkShellNoCC {
+        buildInputs = [
+          devshell-tools.packages.${system}.sbt21
+          devshell-tools.packages.${system}.postgres-fg
+          pkgs.openjdk
+          pkgs.nodejs
+        ];
+        nativeBuildInputs = [
+        ];
 
-          JAVA_HOME = "${pkgs.openjdk21}/lib/openjdk";
-          KEEPER_POSTGRES_DATABASE = "keeper_dev";
-          KEEPER_POSTGRES_USER = "dev";
-          KEEPER_POSTGRES_PASSWORD = "dev";
-          KEEPER_POSTGRES_DEBUG = "false";
-          KEEPER_FIT4S_URI = "http://localhost:8181";
-        };
+        JAVA_HOME = "${pkgs.openjdk21}/lib/openjdk";
+        KEEPER_POSTGRES_DATABASE = "keeper_dev";
+        KEEPER_POSTGRES_USER = "dev";
+        KEEPER_POSTGRES_PASSWORD = "dev";
+        KEEPER_POSTGRES_DEBUG = "false";
+        KEEPER_FIT4S_URI = "http://localhost:8181";
+      };
     });
   };
 }
