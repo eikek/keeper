@@ -62,6 +62,8 @@
           pkgs.openjdk
           pkgs.nodejs
         ];
+
+        SBT_OPTS = "-Xmx2g";
       };
       default = pkgs.mkShellNoCC {
         buildInputs = [
