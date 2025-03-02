@@ -8,10 +8,10 @@ import keeper.bikes.data.{ActionName, ComponentType}
 import keeper.bikes.event.ServiceEventName
 import keeper.common.Distance
 import keeper.common.borer.BaseCodec.given
+import keeper.core.*
 import keeper.core.TotalsTracker.EntryMap.given
-import keeper.core._
 
-import io.bullet.borer.NullOptions.*
+import io.bullet.borer.NullOptions.given
 import io.bullet.borer.derivation.MapBasedCodecs.*
 import io.bullet.borer.derivation.key
 import io.bullet.borer.{Decoder, Encoder}

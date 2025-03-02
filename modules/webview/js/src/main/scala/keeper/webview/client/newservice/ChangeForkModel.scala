@@ -5,7 +5,6 @@ import cats.data.ValidatedNel
 import cats.syntax.all.*
 
 import keeper.bikes.data.ComponentType
-import keeper.bikes.event.Alter.Discard
 import keeper.bikes.event.{Alter, ServiceEvent, ServiceEventName}
 import keeper.bikes.model.BikePart
 import keeper.common.Lenses

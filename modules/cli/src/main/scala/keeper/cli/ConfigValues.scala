@@ -21,8 +21,8 @@ import org.http4s.Uri
 import scribe.Level
 
 object ConfigValues {
-  private[this] val envPrefix = "KEEPER"
-  private[this] val values = new AtomicReference[Map[String, Option[String]]](Map.empty)
+  private val envPrefix = "KEEPER"
+  private val values = new AtomicReference[Map[String, Option[String]]](Map.empty)
 
   def getAll: Map[String, Option[String]] = values.get()
 
@@ -119,10 +119,10 @@ object ConfigValues {
       Duration.unapply(s).map(Duration.apply.tupled)
     }
 
-  private[this] def addName(name: String, defaultValue: Option[String]) =
+  private def addName(name: String, defaultValue: Option[String]) =
     values.updateAndGet(m => m.updated(name, defaultValue))
 
-  private[this] def config(
+  private def config(
       name: String,
       default: Option[String]
   ): ConfigValue[Effect, String] = {
@@ -133,8 +133,8 @@ object ConfigValues {
     default.map(cv.default(_)).getOrElse(cv)
   }
 
-  private[this] def config(name: String): ConfigValue[Effect, String] = config(name, None)
+  private def config(name: String): ConfigValue[Effect, String] = config(name, None)
 
-  private[this] def config(name: String, defval: String): ConfigValue[Effect, String] =
+  private def config(name: String, defval: String): ConfigValue[Effect, String] =
     config(name, Some(defval))
 }

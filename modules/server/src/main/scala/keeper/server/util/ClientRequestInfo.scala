@@ -1,10 +1,10 @@
 package keeper.server.util
 
 import cats.data.NonEmptyList
-import cats.implicits._
+import cats.implicits.*
 
-import org.http4s._
-import org.http4s.headers._
+import org.http4s.*
+import org.http4s.headers.*
 import org.typelevel.ci.CIString
 
 /** Obtain information about the client by inspecting the request. */

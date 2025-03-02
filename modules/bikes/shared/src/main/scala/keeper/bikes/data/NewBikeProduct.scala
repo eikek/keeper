@@ -2,7 +2,7 @@ package keeper.bikes.data
 
 import keeper.common.Lenses
 
-import io.bullet.borer.NullOptions.*
+import io.bullet.borer.NullOptions.given
 import io.bullet.borer.derivation.MapBasedCodecs.*
 import io.bullet.borer.{Decoder, Encoder}
 import monocle.Lens

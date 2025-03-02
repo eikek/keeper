@@ -21,7 +21,7 @@ final case class DeviceBuild(
     DeviceBuild.eventChange(ev)(this)
 
   def applyAll(events: Seq[ConfigEvent]): DeviceBuild =
-    events.foldLeft(this)(_ applyEvent _)
+    events.foldLeft(this)(_.applyEvent(_))
 
   def findDevice(componentId: ComponentId): Option[DeviceId] = {
     @annotation.tailrec

@@ -3,7 +3,7 @@ package keeper.bikes.db
 import java.time.Instant
 
 import keeper.bikes.data.ComponentWithDevice
-import keeper.bikes.model._
+import keeper.bikes.model.*
 import keeper.core.MaintenanceBuild
 
 trait Inventory[F[_]] {

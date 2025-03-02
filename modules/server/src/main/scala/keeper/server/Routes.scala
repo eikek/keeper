@@ -14,12 +14,12 @@ final class Routes[F[_]: Async](
     zoneId: ZoneId
 ) {
 
-  private[this] val components = new ComponentRoutes[F](bikeShop.inventory, zoneId)
-  private[this] val products = new ProductRoutes[F](bikeShop.inventory.products)
-  private[this] val brands = new BrandRoutes[F](bikeShop.inventory.brands)
-  private[this] val bikes = new BikeRoutes[F](bikeShop, zoneId)
-  private[this] val strava = new StravaRoutes[F](bikeShop)
-  private[this] val ui = new UiRoutes[F]
+  private val components = new ComponentRoutes[F](bikeShop.inventory, zoneId)
+  private val products = new ProductRoutes[F](bikeShop.inventory.products)
+  private val brands = new BrandRoutes[F](bikeShop.inventory.brands)
+  private val bikes = new BikeRoutes[F](bikeShop, zoneId)
+  private val strava = new StravaRoutes[F](bikeShop)
+  private val ui = new UiRoutes[F]
 
   val all: HttpRoutes[F] =
     Router(

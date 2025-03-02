@@ -1,7 +1,7 @@
 package keeper.webview.client.newbike
 
 import keeper.bikes.data.{ComponentType, ComponentWithDevice}
-import keeper.bikes.event._
+import keeper.bikes.event.*
 import keeper.common.Lenses
 import keeper.core.ComponentId
 

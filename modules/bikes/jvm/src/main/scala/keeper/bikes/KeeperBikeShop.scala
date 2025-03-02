@@ -1,9 +1,9 @@
 package keeper.bikes
 
 import cats.NonEmptyParallel
+import cats.effect.Async
 import cats.effect.kernel.Resource
 import cats.effect.std.Console
-import cats.effect.{Async, Temporal}
 import cats.syntax.all.*
 import fs2.io.file.Files
 import fs2.io.net.Network
@@ -26,7 +26,7 @@ final class KeeperBikeShop[F[_]](
 ) extends BikeShop[F]
 
 object KeeperBikeShop:
-  def apply[F[_]: Async: Tracer: Network: Console: Temporal: NonEmptyParallel: Files](
+  def apply[F[_]: Async: Tracer: Network: Console: NonEmptyParallel: Files](
       config: Config
   ): Resource[F, BikeShop[F]] =
     SkunkSession(config.database).flatMap(pool => apply(config, pool))

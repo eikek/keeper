@@ -4,7 +4,7 @@ import java.time.Instant
 
 import fs2.Stream
 
-import keeper.strava.data._
+import keeper.strava.data.*
 
 import org.http4s.{Request, Uri}
 

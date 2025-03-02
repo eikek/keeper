@@ -7,7 +7,7 @@ import fs2.concurrent.{Signal, SignallingRef}
 import fs2.dom.HtmlDivElement
 
 import keeper.bikes.data.{ComponentType, ComponentWithDevice}
-import keeper.bikes.model._
+import keeper.bikes.model.*
 import keeper.common.Distance
 import keeper.common.Lenses.syntax.*
 import keeper.core.ComponentId

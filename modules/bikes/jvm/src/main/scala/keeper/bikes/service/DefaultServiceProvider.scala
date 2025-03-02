@@ -11,7 +11,7 @@ import cats.syntax.all.*
 import fs2.Stream
 
 import keeper.bikes.BikeServiceProvider
-import keeper.bikes.data._
+import keeper.bikes.data.*
 import keeper.bikes.db.{Inventory, MaintenanceRepository}
 import keeper.bikes.event.ServiceEvent
 import keeper.bikes.model.*

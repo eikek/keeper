@@ -22,14 +22,13 @@ object KeeperServer {
       zoneId: ZoneId
   ): HttpRoutes[F] = {
     val cors = CORS.policy.withAllowHeadersAll
+    val routes = new Routes[F](bikeShop, zoneId)
     val logger = scribe.cats.effect[F]
-    Logger.httpRoutes(
+    Logger.httpRoutes[F](
       logHeaders = true,
       logBody = false,
       logAction = Some(msg => logger.debug(msg))
-    )(
-      cors(new Routes[F](bikeShop, zoneId).all)
-    )
+    )(cors.httpRoutes[F](routes.all))
   }
 
   def apply[F[_]: Async: Network](

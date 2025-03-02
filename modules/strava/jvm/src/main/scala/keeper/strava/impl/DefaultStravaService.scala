@@ -11,7 +11,7 @@ import cats.syntax.all.*
 import fs2.Stream
 
 import keeper.strava.*
-import keeper.strava.data._
+import keeper.strava.data.*
 
 import org.http4s.{Request, Uri}
 
@@ -20,7 +20,7 @@ final class DefaultStravaService[F[_]: Sync](
     client: StravaClient[F],
     tokenStore: TokenStore[F]
 ) extends StravaService[F] {
-  private[this] val logger = scribe.cats.effect[F]
+  private val logger = scribe.cats.effect[F]
 
   def createAuthUrl(
       redirectUrl: String,

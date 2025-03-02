@@ -5,7 +5,6 @@ import java.time.Instant
 import cats.Id
 import cats.data.NonEmptyList
 
-import keeper.bikes.data.ComponentState
 import keeper.bikes.data.*
 import keeper.core.{ComponentType as _, *}
 

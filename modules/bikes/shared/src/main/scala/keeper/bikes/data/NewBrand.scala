@@ -1,6 +1,6 @@
 package keeper.bikes.data
 
-import io.bullet.borer.NullOptions.*
+import io.bullet.borer.NullOptions.given
 import io.bullet.borer.derivation.MapBasedCodecs.*
 import io.bullet.borer.{Decoder, Encoder}
 

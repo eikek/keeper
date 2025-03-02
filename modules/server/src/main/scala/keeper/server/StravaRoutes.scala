@@ -21,7 +21,7 @@ final class StravaRoutes[F[_]: Sync](
 ) extends Http4sDsl[F]
     with MoreHttp4sDsl[F] {
 
-  private[this] val randomState =
+  private val randomState =
     UUID.randomUUID().toString.take(8)
 
   def routes: HttpRoutes[F] = keeper.stravaService match

@@ -1,15 +1,15 @@
 package keeper.strava
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 
-import cats.effect._
+import cats.effect.*
 import fs2.Stream
 import fs2.io.file.Files
 
 import keeper.strava.data.{StravaAccessToken, StravaFileType}
 
 import org.http4s.ember.client.EmberClientBuilder
-import org.http4s.implicits._
+import org.http4s.implicits.*
 
 object FileUploadTest extends IOApp {
   val token = StravaAccessToken("none")

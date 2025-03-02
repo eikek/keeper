@@ -10,7 +10,7 @@ import keeper.common.borer.BaseCodec.given
 import keeper.common.borer.syntax.all.*
 import keeper.core.{ComponentId, DeviceId}
 
-import io.bullet.borer.NullOptions.*
+import io.bullet.borer.NullOptions.given
 import io.bullet.borer.derivation.MapBasedCodecs.*
 import io.bullet.borer.{Decoder, Encoder}
 import monocle.Lens

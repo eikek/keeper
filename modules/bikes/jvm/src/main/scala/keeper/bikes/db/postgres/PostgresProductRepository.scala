@@ -12,7 +12,7 @@ import skunk.data.Completion
 
 final class PostgresProductRepository[F[_]: Sync](session: Resource[F, Session[F]])
     extends ProductRepository[F] {
-  private[this] val logger = scribe.cats.effect[F]
+  private val logger = scribe.cats.effect[F]
 
   override def storeProduct(p: NewBikeProduct): F[ProductId] =
     session.use(s =>

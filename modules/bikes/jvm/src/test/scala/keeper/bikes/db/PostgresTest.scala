@@ -15,7 +15,7 @@ import skunk.implicits.*
 
 trait PostgresTest {
   given Tracer[IO] = Tracer.noop[IO]
-  private[this] val logger = scribe.cats.io
+  private val logger = scribe.cats.io
 
   def makeSession(cfg: PostgresConfig): Resource[IO, Session[IO]] =
     Session

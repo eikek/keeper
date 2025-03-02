@@ -14,8 +14,8 @@ import keeper.strava.data.*
 import keeper.strava.{StravaAppCredentials, StravaClientConfig, data}
 
 import com.comcast.ip4s.{Host, Port}
+import org.http4s.*
 import org.http4s.Method.POST
-import org.http4s._
 import org.http4s.client.Client
 import org.http4s.client.dsl.Http4sClientDsl
 import org.http4s.dsl.Http4sDsl
@@ -27,7 +27,7 @@ final class StravaOAuth[F[_]: Async: Network](
     client: Client[F]
 ) {
 
-  private[this] val logger = scribe.cats[F]
+  private val logger = scribe.cats[F]
 
   def authRequestUrl(
       cfg: StravaAppCredentials,
@@ -137,9 +137,6 @@ final class StravaOAuth[F[_]: Async: Network](
       cfg: StravaAppCredentials,
       state: String
   )(req: Request[F]): F[Either[String, TokenAndScope]] = {
-    val dsl = new Http4sDsl[F] {}
-    import dsl._
-
     val resp: F[Either[String, TokenAndScope]] =
       req.params.get("error") match {
         case Some(err) => s"Strava disallowed access: $err".asLeft[TokenAndScope].pure[F]

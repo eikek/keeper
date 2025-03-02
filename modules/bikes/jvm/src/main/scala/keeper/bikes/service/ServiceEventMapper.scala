@@ -4,7 +4,7 @@ import cats.Id
 import cats.data.NonEmptyList
 import cats.syntax.all.*
 
-import keeper.bikes.data._
+import keeper.bikes.data.*
 import keeper.bikes.event.ServiceEvent
 import keeper.bikes.event.ServiceEvent.WaxChain.WaxType
 import keeper.bikes.model.BikeServiceError
@@ -13,8 +13,8 @@ import keeper.core.DeviceBuilder.given
 import keeper.core.{DeviceBuild, DeviceBuilder, TypeInfo}
 
 final private class ServiceEventMapper(typeInfo: TypeInfo[Id, ComponentType]) {
-  private[this] val b = DeviceBuilder.withTypes(typeInfo)
-  private[this] val schemaCheck = ComponentSchema.check(typeInfo.componentType)
+  private val b = DeviceBuilder.withTypes(typeInfo)
+  private val schemaCheck = ComponentSchema.check(typeInfo.componentType)
 
   def validateApply(
       current: DeviceBuild,

@@ -5,7 +5,7 @@ import cats.syntax.all.*
 import cats.{Applicative, Functor, Monad}
 
 import keeper.bikes.data.{ActionName, NewMaintenanceEvent}
-import keeper.core._
+import keeper.core.*
 
 type ServiceEventBuilder[F[_]] = StateT[F, DeviceBuild, Seq[NewMaintenanceEvent]]
 

@@ -16,7 +16,7 @@ import keeper.webview.client.util.Action
 import calico.html.io.{*, given}
 
 object BikeTotalsForm {
-  private[this] val logger = scribe.cats.io
+  private val logger = scribe.cats.io
 
   def render(
       model: SignallingRef[IO, BikeTotalsModel],

@@ -22,7 +22,7 @@ import skunk.Session
 final class PostgresInventory[F[_]: Sync: NonEmptyParallel](
     session: Resource[F, Session[F]]
 ) extends Inventory[F] {
-  private[this] val logger = scribe.cats.effect[F]
+  private val logger = scribe.cats.effect[F]
 
   val brands: BrandRepository[F] = new PostgresBrandRepository[F](session)
   val products: ProductRepository[F] = new PostgresProductRepository[F](session)

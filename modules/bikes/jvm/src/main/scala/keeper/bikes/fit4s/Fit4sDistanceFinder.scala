@@ -24,7 +24,7 @@ final class Fit4sDistanceFinder[F[_]: Sync](
     config: Fit4sConfig
 ) extends DistanceFinder[F]
     with Http4sClientDsl[F] {
-  private[this] val logger = scribe.cats.effect[F]
+  private val logger = scribe.cats.effect[F]
 
   def findDistanceAt(
       date: Instant,

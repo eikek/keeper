@@ -4,7 +4,6 @@ import cats.Eq
 import cats.data.ValidatedNel
 import cats.syntax.all.*
 
-import keeper.bikes.event.Alter.Discard
 import keeper.bikes.event.{Alter, ServiceEvent, ServiceEventName}
 import keeper.bikes.model.Bike
 import keeper.core.{ComponentId, DeviceId}

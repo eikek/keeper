@@ -24,8 +24,8 @@ final class DefaultStravaClient[F[_]: Async: Network: Files](
 ) extends StravaClient[F]
     with Http4sClientDsl[F] {
 
-  private[this] val oauth = new StravaOAuth[F](config, client)
-  private[this] val upload = new StravaUpload[F](config, client)
+  private val oauth = new StravaOAuth[F](config, client)
+  private val upload = new StravaUpload[F](config, client)
 
   def authRequestUrl(
       cfg: StravaAppCredentials,

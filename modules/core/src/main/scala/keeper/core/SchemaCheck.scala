@@ -5,7 +5,7 @@ import cats.data.{NonEmptyList, ValidatedNel}
 import cats.syntax.all.*
 
 import keeper.common.Node
-import keeper.core.SchemaCheck._
+import keeper.core.SchemaCheck.*
 
 import io.bullet.borer.Encoder
 

@@ -1,8 +1,8 @@
 package keeper.bikes.data
 
 import keeper.common.Node
+import keeper.core.*
 import keeper.core.Schema.Value
-import keeper.core._
 
 object ComponentSchema:
   val get: Schema[ComponentType] =

@@ -1,8 +1,8 @@
 package keeper.cli
 
-import cats.effect._
+import cats.effect.*
 
-import keeper.cli.config._
+import keeper.cli.config.*
 
 import com.monovore.decline.Opts
 

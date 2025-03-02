@@ -4,12 +4,12 @@ import java.io.BufferedInputStream
 import java.nio.charset.StandardCharsets
 import java.util.zip.{ZipEntry, ZipFile, ZipOutputStream}
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 import scala.util.Using
 import scala.util.Using.Releasable
 
-import cats.effect._
-import cats.syntax.all._
+import cats.effect.*
+import cats.syntax.all.*
 import fs2.io.file.{Files, Path}
 import fs2.{Chunk, Pipe, Stream}
 

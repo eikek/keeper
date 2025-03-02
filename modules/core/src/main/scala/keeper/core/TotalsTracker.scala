@@ -2,7 +2,7 @@ package keeper.core
 
 import keeper.core.TotalsTracker.{Entry, EntryMap}
 
-import io.bullet.borer.NullOptions.*
+import io.bullet.borer.NullOptions.given
 import io.bullet.borer.derivation.MapBasedCodecs.*
 import io.bullet.borer.{Decoder, Encoder}
 

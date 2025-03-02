@@ -2,7 +2,6 @@ package keeper.server
 
 import cats.data.{Kleisli, OptionT}
 import cats.effect.*
-import cats.syntax.all.*
 
 import keeper.server.util.*
 
@@ -11,7 +10,7 @@ import org.http4s.dsl.Http4sDsl
 
 final class UiRoutes[F[_]: Async] extends Http4sDsl[F] with MoreHttp4sDsl[F] {
 
-  private[this] val suffixes = List(
+  private val suffixes = List(
     ".css",
     ".eot",
     ".html",

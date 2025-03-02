@@ -23,7 +23,7 @@ import calico.html.io.{*, given}
 import monocle.Monocle
 
 object ServiceForm {
-  private[this] val logger = scribe.cats.io
+  private val logger = scribe.cats.io
 
   def render(
       model: SignallingRef[IO, Model],
