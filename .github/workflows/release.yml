@@ -28,7 +28,7 @@ jobs:
             exit 1
           fi
 
-      - uses: cachix/install-nix-action@v27
+      - uses: cachix/install-nix-action@v30
       - uses: bahmutov/npm-install@v1
         with:
           working-directory: modules/webview
