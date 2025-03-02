@@ -15,11 +15,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: cachix/install-nix-action@v30
+
       - name: Set current version
         id: version
         shell: bash
         run: |
-          sbt 'cli/writeVersion'
+          nix develop .#ci --command sbt 'cli/writeVersion'
           KEEPER_VERSION=$(cat target/version.txt)
           echo "KEEPER_VERSION=${KEEPER_VERSION}" >> $GITHUB_ENV
 
@@ -27,11 +29,6 @@ jobs:
             echo "Version not set!"
             exit 1
           fi
-
-      - uses: cachix/install-nix-action@v30
-      - uses: bahmutov/npm-install@v1
-        with:
-          working-directory: modules/webview
 
       - name: create zip package
         run: nix develop .#ci --command ./make-cli.sh
