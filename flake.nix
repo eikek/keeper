@@ -71,6 +71,7 @@
           devshell-tools.packages.${system}.postgres-fg
           pkgs.openjdk
           pkgs.nodejs
+          pkgs.tailwindcss
         ];
         nativeBuildInputs = [
         ];
