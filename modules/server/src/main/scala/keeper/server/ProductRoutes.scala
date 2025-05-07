@@ -1,6 +1,6 @@
 package keeper.server
 
-import cats.effect.Sync
+import cats.effect.Async
 import cats.syntax.all.*
 
 import keeper.bikes.data.{NewBikeProduct, ProductWithBrand}
@@ -11,7 +11,7 @@ import keeper.server.util.{MoreHttp4sDsl, ProductIdVar, ProductQueryParam}
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 
-final class ProductRoutes[F[_]: Sync](repo: ProductRepository[F])
+final class ProductRoutes[F[_]: Async](repo: ProductRepository[F])
     extends Http4sDsl[F]
     with MoreHttp4sDsl[F] {
 

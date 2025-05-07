@@ -10,10 +10,10 @@ import fs2.io.file.Files
 import fs2.io.file.Path
 import fs2.io.net.Network
 
-import keeper.http.borer.BorerEntityCodec.Implicits.*
 import keeper.strava.data.*
 import keeper.strava.{StravaAppCredentials, StravaClient, StravaClientConfig}
 
+import com.github.eikek.borer.compats.http4s.BorerEntityJsonCodec.given
 import org.http4s.client.Client
 import org.http4s.client.dsl.Http4sClientDsl
 import org.http4s.{Method, Request, Uri}

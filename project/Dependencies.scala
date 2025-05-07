@@ -7,12 +7,13 @@ object Dependencies {
   object V {
     val scala2 = "2.13.10"
     val scala3 = "3.6.4"
-
+    
     val borer = "1.16.0"
-    val catsEffect = "3.5.7"
+    val catsEffect = "3.6.0"
+    val borerCompats = "0.2.1"
     val catsParse = "1.1.0"
     val calico = "0.2.3"
-    val ciris = "3.7.0"
+    val ciris = "3.8.0"
     val decline = "2.5.0"
     val doodle = "0.20.0"
     val doobie = "1.0.0-RC5"
@@ -22,20 +23,30 @@ object Dependencies {
     val h2 = "2.2.224"
     val monocle = "3.3.0"
     val munit = "1.1.0"
-    val munitCatsEffect = "2.0.0"
+    val munitCatsEffect = "2.1.0"
     val scodec1 = "1.11.10"
     val scodec2 = "2.2.2"
     val catsCore = "2.9.0"
-    val fs2 = "3.11.0"
+    val fs2 = "3.12.0"
     val scalaCheck = "1.17.0"
     val scalaCsv = "1.3.10"
     val postgres = "42.7.0"
     val scalaJsDom = "2.8.0"
     val scalaJsTime = "2.6.0"
-    val scribeSlf4j = "3.16.0"
-    val scribe = "3.16.0"
+    val scribeSlf4j = "3.16.1"
+    val scribe = "3.16.1"
     val skunk = "1.1.0-M3"
   }
+
+  val borerCompatsFs2 = Def.setting(
+    Seq("com.github.eikek" %%% "borer-compats-fs2" % V.borerCompats)
+  )
+
+  val borerCompatsHttp4s = Def.setting(
+    Seq("com.github.eikek" %%% "borer-compats-http4s" % V.borerCompats)
+  )
+  val borerCompatsHttp4sJvm =
+    Seq("com.github.eikek" %% "borer-compats-http4s" % V.borerCompats)
 
   val doodle = Def.setting(
     Seq(

@@ -9,12 +9,12 @@ import cats.syntax.all.*
 import cats.{Applicative, Monad}
 
 import keeper.client.data.RequestFailure
-import keeper.http.borer.BorerEntityCodec
 
+import com.github.eikek.borer.compats.http4s.BorerEntityJsonCodec
 import org.http4s.*
 import org.http4s.dsl.Http4sDsl
 
-trait MoreHttp4sDsl[F[_]: Sync] extends BorerEntityCodec.Implicits { self: Http4sDsl[F] =>
+trait MoreHttp4sDsl[F[_]: Sync] extends BorerEntityJsonCodec { self: Http4sDsl[F] =>
 
   implicit final class ValidatedToResponse(
       resp: ValidatedNel[ParseFailure, F[Response[F]]]
