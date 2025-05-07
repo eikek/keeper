@@ -42,4 +42,4 @@ object BikeServiceError:
       Semigroup.instance((a, b) => BrandNotFound(a.ids.concatNel(b.ids)))
 
   given Encoder[BikeServiceError] =
-    Encoder[Map[String, String]].contramap(err => Map("message" -> err.getMessage))
+    Encoder.of[Map[String, String]].contramap(err => Map("message" -> err.getMessage))
