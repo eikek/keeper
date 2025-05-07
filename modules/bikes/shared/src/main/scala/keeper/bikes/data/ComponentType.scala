@@ -26,6 +26,7 @@ enum ComponentType:
   case FrontMudguard
   case RearMudguard
   case InnerTube
+  case CrankSet
 
   def name: String = productPrefix
 

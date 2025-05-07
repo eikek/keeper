@@ -26,7 +26,8 @@ final case class ChangeBikeModel(
     fork: Alter[ComponentId] = Alter.Discard,
     frontDerailleur: Alter[ComponentId] = Alter.Discard,
     rearDerailleur: Alter[ComponentId] = Alter.Discard,
-    rearMudguard: Alter[ComponentId] = Alter.Discard
+    rearMudguard: Alter[ComponentId] = Alter.Discard,
+    crankSet: Alter[ComponentId] = Alter.Discard
 ) extends AsServiceEvent:
   def bikeValidated: ValidatedNel[String, DeviceId] =
     bike.toValidNel("You need to select a bike")
@@ -47,6 +48,7 @@ final case class ChangeBikeModel(
         chain,
         rearBrake,
         fork,
+        crankSet,
         frontDerailleur,
         rearDerailleur,
         rearMudguard
@@ -112,6 +114,9 @@ object ChangeBikeModel:
       _.copy(rearMudguard = a)
     )
 
+  val crankSet: Lens[ChangeBikeModel, Alter[ComponentId]] =
+    Lens[ChangeBikeModel, Alter[ComponentId]](_.crankSet)(a => _.copy(crankSet = a))
+
   def forType(ct: ComponentType): Lens[ChangeBikeModel, Alter[ComponentId]] = ct match
     case ComponentType.RearWheel       => rearWheel
     case ComponentType.FrontWheel      => frontWheel
@@ -125,6 +130,7 @@ object ChangeBikeModel:
     case ComponentType.Seatpost        => seatpost
     case ComponentType.Saddle          => saddle
     case ComponentType.RearMudguard    => rearMudguard
+    case ComponentType.CrankSet        => crankSet
     case ComponentType.FrontBrake      => Lenses.noop(Alter.Discard)
     case ComponentType.Cassette        => Lenses.noop(Alter.Discard)
     case ComponentType.BrakeDisc       => Lenses.noop(Alter.Discard)
