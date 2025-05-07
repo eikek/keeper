@@ -57,4 +57,6 @@ object ComponentIcon {
         Saddle(containerMod, title := ct.name)(svgCss)
       case ComponentType.InnerTube =>
         InnerTube(containerMod, title := ct.name)(svgCss)
+      case ComponentType.CrankSet =>
+        CrankSet(containerMod, title := ct.name)(svgCss)
 }

@@ -74,7 +74,8 @@ object ServiceEvent:
       fork: Option[ConfiguredFork] = None,
       frontDerailleur: Option[ComponentId] = None,
       rearDerailleur: Option[ComponentId] = None,
-      rearMudguard: Option[ComponentId] = None
+      rearMudguard: Option[ComponentId] = None,
+      crankSet: Option[ComponentId] = None
   ) extends BuildEvent {
     val newDevice: NewDevice =
       NewDevice(brandId, name, description, ComponentState.Active, addedAt)
@@ -92,6 +93,7 @@ object ServiceEvent:
         case ct @ ComponentType.RearBrake  => rearBrake.map(_.id -> ct)
         case ct @ ComponentType.FrontBrake => fork.flatMap(_.brake).map(_.id -> ct)
         case ct @ ComponentType.Fork       => fork.map(c => c.id -> ct).toSeq
+        case ct @ ComponentType.CrankSet   => crankSet.map(_ -> ct).toSeq
         case ct @ ComponentType.FrontDerailleur =>
           frontDerailleur.map(id => id -> ct).toSeq
         case ct @ ComponentType.RearDerailleur => rearDerailleur.map(_ -> ct).toSeq
@@ -135,6 +137,7 @@ object ServiceEvent:
       chain: Alter[ComponentId] = Alter.Discard,
       rearBrake: Alter[ComponentId] = Alter.Discard,
       fork: Alter[ComponentId] = Alter.Discard,
+      crankSet: Alter[ComponentId] = Alter.Discard,
       frontDerailleur: Alter[ComponentId] = Alter.Discard,
       rearDerailleur: Alter[ComponentId] = Alter.Discard,
       rearMudguard: Alter[ComponentId] = Alter.Discard
@@ -152,6 +155,7 @@ object ServiceEvent:
         case ComponentType.Chain           => chain
         case ComponentType.RearBrake       => rearBrake
         case ComponentType.Fork            => fork
+        case ComponentType.CrankSet        => crankSet
         case ComponentType.FrontDerailleur => frontDerailleur
         case ComponentType.RearDerailleur  => rearDerailleur
         case ComponentType.RearMudguard    => rearMudguard

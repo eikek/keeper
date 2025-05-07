@@ -37,4 +37,12 @@ object ComponentType {
          ('innertube')
        """
   )
+
+  val addCrankSet = ChangeSet.create("add crankset component type")(
+    sql"""
+       INSERT INTO "component_type" ("name")
+       VALUES
+         ('crankset')
+    """
+  )
 }
