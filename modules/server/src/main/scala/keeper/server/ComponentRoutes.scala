@@ -2,7 +2,7 @@ package keeper.server
 
 import java.time.ZoneId
 
-import cats.effect.{Clock, Sync}
+import cats.effect.{Async, Clock}
 import cats.syntax.all.*
 
 import keeper.bikes.data.{ComponentWithProduct, NewComponent}
@@ -13,7 +13,7 @@ import keeper.server.util.*
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 
-final class ComponentRoutes[F[_]: Sync](inventory: Inventory[F], zoneId: ZoneId)
+final class ComponentRoutes[F[_]: Async](inventory: Inventory[F], zoneId: ZoneId)
     extends Http4sDsl[F]
     with MoreHttp4sDsl[F] {
 

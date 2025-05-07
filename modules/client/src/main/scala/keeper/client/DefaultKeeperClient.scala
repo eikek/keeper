@@ -15,6 +15,7 @@ import keeper.bikes.model.*
 import keeper.client.data.*
 import keeper.core.ComponentId
 
+import com.github.eikek.borer.compats.http4s.BorerEntityJsonCodec.given
 import org.http4s.client.{Client, UnexpectedStatus}
 import org.http4s.ember.client.EmberClientBuilder
 import org.http4s.headers.{Accept, MediaRangeAndQValue}

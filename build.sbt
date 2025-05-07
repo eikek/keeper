@@ -133,24 +133,6 @@ lazy val core = crossProject(JSPlatform, JVMPlatform)
 lazy val coreJs = core.js
 lazy val coreJvm = core.jvm
 
-lazy val http4sBorer = crossProject(JSPlatform, JVMPlatform)
-  .crossType(CrossType.Full)
-  .withoutSuffixFor(JVMPlatform)
-  .in(file("modules/http4s-borer"))
-  .settings(sharedSettings)
-  .settings(testSettings)
-  .settings(scalafixSettings)
-  .settings(
-    name := "keeper-http4s-borer",
-    description := "Use borer codecs with http4s",
-    libraryDependencies ++=
-      Dependencies.borerJs.value ++
-        Dependencies.http4sCore.value ++
-        Dependencies.fs2Core.value
-  )
-lazy val http4sBorerJs = http4sBorer.js
-lazy val http4sBorerJvm = http4sBorer.jvm
-
 lazy val strava = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .withoutSuffixFor(JVMPlatform)
@@ -164,7 +146,8 @@ lazy val strava = crossProject(JSPlatform, JVMPlatform)
     libraryDependencies ++=
       Dependencies.http4sJsClient.value ++
         Dependencies.borerJs.value ++
-        Dependencies.fs2Core.value
+        Dependencies.fs2Core.value ++
+        Dependencies.borerCompatsHttp4s.value
   )
   .jvmSettings(
     libraryDependencies ++=
@@ -172,7 +155,7 @@ lazy val strava = crossProject(JSPlatform, JVMPlatform)
         Dependencies.fs2Jvm ++
         Dependencies.scribe
   )
-  .dependsOn(http4sBorer, common)
+  .dependsOn(common)
 
 lazy val stravaJvm = strava.jvm
 lazy val stravaJs = strava.js
@@ -194,7 +177,8 @@ lazy val bikes = crossProject(JSPlatform, JVMPlatform)
       Dependencies.fs2Jvm ++
         Dependencies.skunk ++
         Dependencies.http4sClientJvm ++
-        Dependencies.scribe,
+        Dependencies.scribe ++
+        Dependencies.borerCompatsHttp4sJvm,
     Test / testOptions += Tests.Setup(_ => PostgresServer.start()),
     Test / testOptions += Tests.Cleanup(_ => PostgresServer.stop())
   )
@@ -203,7 +187,7 @@ lazy val bikes = crossProject(JSPlatform, JVMPlatform)
     common % "compile->compile;test->test"
   )
 
-lazy val bikesJvm = bikes.jvm.dependsOn(http4sBorerJvm, stravaJvm)
+lazy val bikesJvm = bikes.jvm.dependsOn(stravaJvm)
 lazy val bikesJs = bikes.js
 
 lazy val client = crossProject(JSPlatform, JVMPlatform)
@@ -222,12 +206,12 @@ lazy val client = crossProject(JSPlatform, JVMPlatform)
         Dependencies.borerJs.value ++
         Dependencies.monocle.value ++
         Dependencies.http4sJsClient.value ++
-        Dependencies.scribeJs.value
+        Dependencies.scribeJs.value ++
+        Dependencies.borerCompatsHttp4s.value
   )
   .dependsOn(
     common % "compile->compile;test->test",
     core % "compile->compile;test->test",
-    http4sBorer % "compile->compile;test->test",
     bikes % "compile->compile;test->test"
   )
 
@@ -245,7 +229,7 @@ lazy val server = project
         Dependencies.catsParse ++
         Dependencies.scribe
   )
-  .dependsOn(coreJvm, http4sBorerJvm, commonJvm, bikesJvm, client.jvm)
+  .dependsOn(coreJvm, commonJvm, bikesJvm, client.jvm)
 
 val webclientTimezones = Set(
   "Europe/Berlin",
@@ -308,12 +292,12 @@ lazy val webview =
           Dependencies.scalaJsJavaTime.value ++
           Dependencies.http4sJsClient.value ++
           Dependencies.http4sDom.value ++
-          Dependencies.scribeJs.value
+          Dependencies.scribeJs.value ++
+          Dependencies.borerCompatsHttp4s.value
     )
     .dependsOn(
       bikes % "compile->compile;test->test",
       core % "compile->compile;test->test",
-      http4sBorer % "compile->compile;test->test",
       client % "compile->compile;test->test"
     )
 
@@ -370,8 +354,6 @@ lazy val root = project
     coreJs,
     bikesJvm,
     bikesJs,
-    http4sBorerJs,
-    http4sBorerJvm,
     stravaJvm,
     stravaJs,
     webviewJs,

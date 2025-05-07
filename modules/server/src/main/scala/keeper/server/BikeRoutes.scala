@@ -3,7 +3,7 @@ package keeper.server
 import java.time.ZoneId
 
 import cats.data.EitherT
-import cats.effect.Sync
+import cats.effect.Async
 import cats.syntax.all.*
 
 import keeper.bikes.BikeShop
@@ -13,7 +13,7 @@ import keeper.server.util.*
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 
-final class BikeRoutes[F[_]: Sync](
+final class BikeRoutes[F[_]: Async](
     shop: BikeShop[F],
     zoneId: ZoneId
 ) extends Http4sDsl[F]
