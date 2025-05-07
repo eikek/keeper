@@ -18,12 +18,14 @@ trait BaseCodec {
   given Decoder[Instant] = BaseCodec.myInstantDecoder
 
   given _nelEncoder[A: Encoder]: Encoder[NonEmptyList[A]] =
-    Encoder[List[A]].contramap(_.toList)
+    Encoder.of[List[A]].contramap(_.toList)
 
   given _nelDecoder[A: Decoder]: Decoder[NonEmptyList[A]] =
-    Decoder[List[A]].emap(l =>
-      NonEmptyList.fromList(l).toRight(s"Empty list found, but not empty expected")
-    )
+    Decoder
+      .of[List[A]]
+      .emap(l =>
+        NonEmptyList.fromList(l).toRight(s"Empty list found, but not empty expected")
+      )
 
   given _nesEncoder[A: Encoder]: Encoder[NonEmptySet[A]] =
     _nelEncoder.contramap(_.toNonEmptyList)
@@ -32,10 +34,10 @@ trait BaseCodec {
     _nelDecoder.map(_.toNes)
 
   given _mapEncoder[A: Encoder, B: Encoder]: Encoder[Map[A, B]] =
-    Encoder[List[(A, B)]].contramap(_.toList)
+    Encoder.of[List[(A, B)]].contramap(_.toList)
 
   given _mapDecoder[A: Decoder, B: Decoder]: Decoder[Map[A, B]] =
-    Decoder[List[(A, B)]].map(_.toMap)
+    Decoder.of[List[(A, B)]].map(_.toMap)
 
   given Encoder[Duration] = Encoder.forString.contramap(_.toString)
 

@@ -33,14 +33,14 @@ enum Alter[+A]:
 object Alter:
   given alterEq[A]: Eq[Alter[A]] = Eq.fromUniversalEquals
   given jsonEncoder[A: Encoder]: Encoder[Alter[A]] =
-    Encoder[Option[Option[A]]].contramap {
+    Encoder.of[Option[Option[A]]].contramap {
       case Alter.Discard    => None
       case Alter.Unset      => Some(None)
       case Alter.Replace(a) => Some(Some(a))
     }
 
   given jsonDecoder[A: Decoder]: Decoder[Alter[A]] =
-    Decoder[Option[Option[A]]].map {
+    Decoder.of[Option[Option[A]]].map {
       case None          => Alter.Discard
       case Some(None)    => Alter.Unset
       case Some(Some(a)) => Alter.Replace(a)

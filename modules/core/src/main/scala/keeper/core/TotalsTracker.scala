@@ -112,6 +112,6 @@ object TotalsTracker:
   type EntryMap = Map[ComponentId, Entry]
   object EntryMap:
     given Encoder[EntryMap] =
-      Encoder[List[(ComponentId, Entry)]].contramap(_.toList)
+      Encoder.of[List[(ComponentId, Entry)]].contramap(_.toList)
     given Decoder[EntryMap] =
-      Decoder[List[(ComponentId, Entry)]].map(_.toMap)
+      Decoder.of[List[(ComponentId, Entry)]].map(_.toMap)

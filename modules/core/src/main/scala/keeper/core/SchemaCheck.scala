@@ -131,7 +131,7 @@ object SchemaCheck:
   sealed abstract class SchemaError(msg: String) extends RuntimeException(msg)
   object SchemaError:
     given Encoder[SchemaError] =
-      Encoder[Map[String, String]].contramap(err => Map("message" -> err.getMessage))
+      Encoder.of[Map[String, String]].contramap(err => Map("message" -> err.getMessage))
 
   final case class TypeNotFound(ids: NonEmptyList[ComponentId])
       extends SchemaError(s"The components type could not be determined: $ids")

@@ -17,4 +17,4 @@ object BikesResolveError:
       extends BikesResolveError(s"Component not found: $ids")
 
   given Encoder[BikesResolveError] =
-    Encoder[Map[String, String]].contramap(err => Map("message" -> err.getMessage))
+    Encoder.of[Map[String, String]].contramap(err => Map("message" -> err.getMessage))
