@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
+
 export default {
     content: [ "./js/src/main/scala/**/*.scala", "./*.html", "./*.js" ],
     theme: {
@@ -19,11 +21,6 @@ export default {
 
         },
     },
-    variants: {
-        extend: {
-            backgroundOpacity: ['dark']
-        }
-    },    
     plugins: [],
 }
 
