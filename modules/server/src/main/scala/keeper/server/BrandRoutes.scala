@@ -1,6 +1,6 @@
 package keeper.server
 
-import cats.effect.Sync
+import cats.effect.Async
 import cats.syntax.all.*
 
 import keeper.bikes.data.*
@@ -11,7 +11,7 @@ import keeper.server.util.*
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 
-final class BrandRoutes[F[_]: Sync](repo: BrandRepository[F])
+final class BrandRoutes[F[_]: Async](repo: BrandRepository[F])
     extends Http4sDsl[F]
     with MoreHttp4sDsl[F] {
 

@@ -3,7 +3,7 @@ package keeper.bikes.fit4s
 import java.time.Instant
 
 import cats.data.OptionT
-import cats.effect.{Async, Resource, Sync}
+import cats.effect.{Async, Resource}
 import cats.syntax.all.*
 import fs2.io.net.Network
 
@@ -12,14 +12,14 @@ import keeper.bikes.data.Device
 import keeper.bikes.model.BikeTotal
 import keeper.bikes.util.DateUtil
 import keeper.common.Distance
-import keeper.http.borer.BorerEntityCodec.Implicits.*
 
+import com.github.eikek.borer.compats.http4s.BorerEntityJsonCodec.given
 import org.http4s.Method
 import org.http4s.client.Client
 import org.http4s.client.dsl.Http4sClientDsl
 import org.http4s.ember.client.EmberClientBuilder
 
-final class Fit4sDistanceFinder[F[_]: Sync](
+final class Fit4sDistanceFinder[F[_]: Async](
     client: Client[F],
     config: Fit4sConfig
 ) extends DistanceFinder[F]
