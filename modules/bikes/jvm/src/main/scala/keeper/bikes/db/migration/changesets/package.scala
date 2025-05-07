@@ -11,6 +11,7 @@ package object changesets {
     Maintenance.serviceEvent,
     Maintenance.maintenanceEvent,
     Maintenance.cache,
-    Strava.auth
+    Strava.auth,
+    ComponentType.addCrankSet
   )
 }

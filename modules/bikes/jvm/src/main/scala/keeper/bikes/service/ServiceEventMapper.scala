@@ -197,6 +197,9 @@ final private class ServiceEventMapper(typeInfo: TypeInfo[Id, ComponentType]) {
           case ct @ ComponentType.Fork =>
             ev.fork.map(f => b.replaceOnDevice(bike, f.id, ct)).orEmpty
 
+          case ct @ ComponentType.CrankSet =>
+            ev.crankSet.map(id => b.replaceOnDevice(bike, id, ct)).orEmpty
+
           case ct @ ComponentType.Chain =>
             ev.chain.map(id => b.replaceOnDevice(bike, id, ct)).orEmpty
 
