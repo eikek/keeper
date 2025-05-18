@@ -2,7 +2,7 @@
   lib,
   stdenv,
   fetchzip,
-  jdk17,
+  jdk21,
   unzip,
   bash,
 }: let
@@ -25,7 +25,7 @@ in
       cp -R * $out/keeper-${version}/
       cat > $out/bin/keeper <<-EOF
       #!${bash}/bin/bash
-      $out/keeper-${version}/bin/keeper-cli -java-home ${jdk17} "\$@"
+      $out/keeper-${version}/bin/keeper-cli -java-home ${jdk21} "\$@"
       EOF
       chmod 755 $out/bin/keeper
     '';
