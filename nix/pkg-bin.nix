@@ -2,7 +2,7 @@
   lib,
   stdenv,
   fetchzip,
-  jdk17,
+  jdk21,
   unzip,
   bash,
 }: let
@@ -15,7 +15,7 @@ in
 
     src = fetchzip {
       url = "https://github.com/eikek/keeper/releases/download/v${version}/keeper-cli-${version}.zip";
-      sha256 = "sha256-/45vBtoiEScIr69RxO7D0r6jPzMUeb8riTn22Bn79Ns=";
+      sha256 = "sha256-jyrky9GMPuPcdBfvfPM50RslGPg3QGdCFUJEkyWU50o=";
     };
 
     buildPhase = "true";
@@ -25,7 +25,7 @@ in
       cp -R * $out/keeper-${version}/
       cat > $out/bin/keeper <<-EOF
       #!${bash}/bin/bash
-      $out/keeper-${version}/bin/keeper-cli -java-home ${jdk17} "\$@"
+      $out/keeper-${version}/bin/keeper-cli -java-home ${jdk21} "\$@"
       EOF
       chmod 755 $out/bin/keeper
     '';
