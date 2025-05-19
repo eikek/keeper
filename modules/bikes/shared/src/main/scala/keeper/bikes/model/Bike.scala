@@ -32,7 +32,8 @@ final case class Bike(
     fork: Option[Fork] = None,
     frontDerailleur: Option[BasicComponent] = None,
     rearDerailleur: Option[BasicComponent] = None,
-    rearMudguard: Option[BasicComponent] = None
+    rearMudguard: Option[BasicComponent] = None,
+    crankSet: Option[BasicComponent] = None
 )
 
 object Bike:
@@ -77,3 +78,6 @@ object Bike:
 
   val rearMudguard: Lens[Bike, Option[BasicComponent]] =
     Lens[Bike, Option[BasicComponent]](_.rearMudguard)(a => _.copy(rearMudguard = a))
+
+  val crankSet: Lens[Bike, Option[BasicComponent]] =
+    Lens[Bike, Option[BasicComponent]](_.crankSet)(a => _.copy(crankSet = a))

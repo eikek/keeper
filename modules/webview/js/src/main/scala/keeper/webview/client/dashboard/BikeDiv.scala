@@ -94,6 +94,7 @@ object BikeDiv {
           )
         ),
         bike.chain.map(compDiv(_, size, compTotals)),
+        bike.crankSet.map(compDiv(_, size, compTotals)),
         bike.frontDerailleur.map(compDiv(_, size, compTotals)),
         bike.rearBrake.map(br =>
           compDivL(br, size, compTotals, br.pad.map(compDivL(_, size, compTotals)))

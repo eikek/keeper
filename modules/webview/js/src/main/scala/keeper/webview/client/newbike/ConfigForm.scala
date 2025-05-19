@@ -54,6 +54,12 @@ object ConfigForm {
           ConfigModel.setter(ComponentType.Chain)
         ),
         simpleType(
+          ComponentType.CrankSet,
+          model,
+          id => ConfigModel.crankSet.exist(_.contains(id)),
+          ConfigModel.setter(ComponentType.CrankSet)
+        ),
+        simpleType(
           ComponentType.Fork,
           model,
           id => ConfigModel.forkId.exist(_ == id),

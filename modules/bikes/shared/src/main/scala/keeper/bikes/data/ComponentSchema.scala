@@ -21,6 +21,7 @@ object ComponentSchema:
       Node.of(Value(ComponentType.RearDerailleur, 1)),
       Node.of(Value(ComponentType.FrontDerailleur, 1)),
       Node.of(Value(ComponentType.Seatpost, 1)),
+      Node.of(Value(ComponentType.CrankSet, 1)),
       Node.of(
         Value(ComponentType.RearBrake, 1),
         Node.of(Value(ComponentType.BrakePad, 1))
