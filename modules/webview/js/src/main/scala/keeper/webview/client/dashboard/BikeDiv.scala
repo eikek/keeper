@@ -94,6 +94,7 @@ object BikeDiv {
           )
         ),
         bike.chain.map(compDiv(_, size, compTotals)),
+        bike.crankSet.map(compDiv(_, size, compTotals)),
         bike.frontDerailleur.map(compDiv(_, size, compTotals)),
         bike.rearBrake.map(br =>
           compDivL(br, size, compTotals, br.pad.map(compDivL(_, size, compTotals)))
@@ -134,7 +135,7 @@ object BikeDiv {
       cls := Css.flexCol + css,
       div(
         cls := Css.flexRowCenter + Css(
-          "dark:hover:bg-blue-500 dark:hover:bg-opacity-25 px-2 rounded py-1"
+          "dark:hover:bg-blue-500/25 px-2 rounded py-1"
         ),
         title := s"${c.product.brand.name} ${c.product.product.name}",
         ComponentIcon(

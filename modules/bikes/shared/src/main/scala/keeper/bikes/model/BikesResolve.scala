@@ -108,6 +108,9 @@ final class BikesResolve[F[_]: Monad](source: ComponentSource[F]) {
           case ComponentType.Chain =>
             Bike.chain.replace(BasicComponent.fromComponent(c).some)
 
+          case ComponentType.CrankSet =>
+            Bike.crankSet.replace(BasicComponent.fromComponent(c).some)
+
           case ComponentType.RearBrake =>
             Bike.rearBrake.replace(
               resolveBrakeCaliper(build.getSubComponents(c.id))(

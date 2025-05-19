@@ -94,6 +94,14 @@ object ChangeBikeForm {
         ),
         partDiv(
           bike,
+          ComponentType.CrankSet,
+          bike.crankSet,
+          components,
+          totals,
+          model
+        ),
+        partDiv(
+          bike,
           ComponentType.Fork,
           bike.fork,
           components,

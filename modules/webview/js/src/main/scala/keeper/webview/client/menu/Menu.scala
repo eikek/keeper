@@ -30,7 +30,7 @@ object Menu {
   private val menuLinkStyle: Css =
     Css(
       "rounded-lg px-2 py-2 my-1 mx-4 dark:hover:text-slate-100 hover:text-gray-900 cursor-pointer"
-    ) + Css("dark:hover:bg-slate-600 dark:bg-opacity-20")
+    ) + Css("dark:hover:bg-slate-600")
 
   private def menuLink(model: SignallingRef[IO, Model]) =
     a(
