@@ -54,6 +54,12 @@ object ConfigForm {
           ConfigModel.setter(ComponentType.Chain)
         ),
         simpleType(
+          ComponentType.CrankSet,
+          model,
+          id => ConfigModel.crankSet.exist(_.contains(id)),
+          ConfigModel.setter(ComponentType.CrankSet)
+        ),
+        simpleType(
           ComponentType.Fork,
           model,
           id => ConfigModel.forkId.exist(_ == id),
@@ -204,7 +210,7 @@ object ConfigForm {
     Css.of(
       Css.flexRowCenter,
       Css("py-2 px-2 mb-2 text-lg rounded-lg"),
-      Css("dark:bg-blue-800 bg-blue-300 bg-opacity-75 dark:bg-opacity-50"),
+      Css("dark:bg-blue-800 bg-blue-300/75 dark:bg-blue/50"),
       Css.textColorViz
     )
 

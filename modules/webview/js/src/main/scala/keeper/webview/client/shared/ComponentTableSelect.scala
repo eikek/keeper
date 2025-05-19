@@ -108,7 +108,7 @@ object ComponentTableSelect {
                 cs.map(p =>
                   tr(
                     cls := Css.tableRow + Css(
-                      "cursor-pointer dark:hover:bg-slate-600 dark:hover:bg-opacity-20"
+                      "cursor-pointer dark:hover:bg-slate-600/20"
                     ),
                     onClick --> Action
                       .eval(
