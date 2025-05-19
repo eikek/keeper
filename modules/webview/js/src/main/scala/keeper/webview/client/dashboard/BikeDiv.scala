@@ -134,7 +134,7 @@ object BikeDiv {
       cls := Css.flexCol + css,
       div(
         cls := Css.flexRowCenter + Css(
-          "dark:hover:bg-blue-500 dark:hover:bg-opacity-25 px-2 rounded py-1"
+          "dark:hover:bg-blue-500/25 px-2 rounded py-1"
         ),
         title := s"${c.product.brand.name} ${c.product.product.name}",
         ComponentIcon(

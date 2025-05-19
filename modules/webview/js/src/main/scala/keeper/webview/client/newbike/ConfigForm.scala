@@ -204,7 +204,7 @@ object ConfigForm {
     Css.of(
       Css.flexRowCenter,
       Css("py-2 px-2 mb-2 text-lg rounded-lg"),
-      Css("dark:bg-blue-800 bg-blue-300 bg-opacity-75 dark:bg-opacity-50"),
+      Css("dark:bg-blue-800 bg-blue-300/75 dark:bg-blue/50"),
       Css.textColorViz
     )
 

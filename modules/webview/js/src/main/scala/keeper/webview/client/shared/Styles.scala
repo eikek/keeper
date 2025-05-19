@@ -58,26 +58,26 @@ trait Styles {
   val iconLink: Css = List(
     Css("dark:text-lime-500 text-blue-500"),
     Css("border dark:border-lime-500 border-blue-500"),
-    Css("dark:hover:bg-lime-500 dark:hover:bg-opacity-25"),
-    Css("hover:bg-blue-500 hover:bg-opacity-50"),
+    Css("dark:hover:bg-lime-500/25"),
+    Css("hover:bg-blue-500/50"),
     Css("px-4 py-2 rounded cursor-pointer")
   ).reduce(_ + _)
 
   val iconLinkBasic: Css = List(
     Css("dark:text-slate-500 text-gray-500"),
     Css.border,
-    Css("dark:hover:bg-slate-500 dark:hover:bg-opacity-25"),
-    Css("hover:bg-gray-500 hover:bg-opacity-50"),
+    Css("dark:hover:bg-slate-500/25"),
+    Css("hover:bg-gray-500/50"),
     Css("px-4 py-2 rounded cursor-pointer")
   ).reduce(_ + _)
 
   val iconLinkRed: Css = List(
     Css("border border-red-600"),
-    Css("bg-red-500 bg-opacity-25 text-red-600"),
-    Css("hover:bg-opacity-50"),
+    Css("bg-red-500/25 text-red-600"),
+    Css("hover:bg-red-500/50"),
     Css("dark:border-rose-600 dark:text-rose-600"),
-    Css("dark:bg-rose-500 dark:bg-opacity-50"),
-    Css("dark:hover:bg-rose-500 dark:hover:bg-opacity-25"),
+    Css("dark:bg-rose-500/50"),
+    Css("dark:hover:bg-rose-500/25"),
     Css("px-4 py-2 rounded cursor-pointer")
   ).reduce(_ + _)
 
@@ -100,7 +100,7 @@ trait Styles {
   ).reduce(_ + _)
   val formResetButton: Css = List(
     Css("py-2 px-6 rounded text-center focus:ring-2 dark:ring-lime-500 ring-blue-500"),
-    Css("dark:bg-slate-600 dark:text-white dark:hover:bg-slate-700 dark:bg-opacity-50"),
+    Css("dark:bg-slate-600/50 dark:text-white dark:hover:bg-slate-700"),
     Css("bg-gray-800 text-white hover:bg-gray-700"),
     Css.border
   ).reduce(_ + _)
@@ -128,27 +128,27 @@ trait Styles {
   val uploadIcon: Css = Css("fa fa-upload")
 
   val blueBoxed = Css(
-    "dark:bg-blue-800 bg-blue-300 bg-opacity-75 dark:bg-opacity-50 rounded-lg"
+    "dark:bg-blue-800/50 bg-blue-300/75 rounded-lg"
   )
 
   val label = List(
     Css("py-0.5 px-1 rounded border"),
     Css(
-      "dark:border-lime-500 dark:bg-lime-500 dark:bg-opacity-25 dark:text-lime-500"
+      "dark:border-lime-500 dark:bg-lime-500/25 dark:text-lime-500"
     ),
-    Css("border-blue-500 bg-blue-300 bg-opacity-50 text-blue-500")
+    Css("border-blue-500/50 bg-blue-300 text-blue-500")
   ).reduce(_ + _)
 
   val labelBasic = List(
     Css("py-0.5 px-1 rounded border"),
-    Css("dark:border-slate-400 dark:bg-slate-300 dark:bg-opacity-25 dark:text-slate-400"),
-    Css("border-blue-500 bg-blue-300 bg-opacity-50 text-blue-500")
+    Css("dark:border-slate-400 dark:bg-slate-300/25 dark:text-slate-400"),
+    Css("border-blue-500 bg-blue-300/50 text-blue-500")
   ).reduce(_ + _)
 
   val infoText: Css = List(
     Css("px-3 py-3 text-lg rounded-xl"),
     Css(
-      "dark:bg-cyan-200 bg-blue-200 bg-opacity-75 dark:bg-opacity-25"
+      "dark:bg-cyan-200/25 bg-blue-200/75"
     ),
     Css("border dark:border-cyan-200 border-blue-200"),
     Css("dark:text-cyan-200 text-blue-600")

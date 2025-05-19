@@ -45,7 +45,7 @@ object ServiceList {
   ): Resource[IO, HtmlDivElement[IO]] =
     div(
       cls := Css.flexCol + Css(
-        "px-2 py-2 dark:hover:bg-slate-600 dark:hover:bg-opacity-20"
+        "px-2 py-2 dark:hover:bg-slate-600/20"
       ),
       idAttr := s"service-${s.id}",
       div(
