@@ -17,6 +17,7 @@ final case class ConfigModel(
     saddle: Option[ComponentId] = None,
     stem: Option[ComponentId] = None,
     chain: Option[ComponentId] = None,
+    crankSet: Option[ComponentId] = None,
     rearBrake: Option[ConfiguredBrake] = None,
     fork: Option[ConfiguredFork] = None,
     frontDerailleur: Option[ComponentId] = None,
@@ -107,6 +108,9 @@ object ConfigModel:
       _.copy(rearDerailleur = a)
     )
 
+  val crankSet: Lens[ConfigModel, Option[ComponentId]] =
+    Lens[ConfigModel, Option[ComponentId]](_.crankSet)(a => _.copy(crankSet = a))
+
   val rearMudguard: Lens[ConfigModel, Option[ComponentId]] =
     Lens[ConfigModel, Option[ComponentId]](_.rearMudguard)(a => _.copy(rearMudguard = a))
 
@@ -155,5 +159,7 @@ object ConfigModel:
           rearMudguard.replace(id)
         case ComponentType.Seatpost =>
           seatpost.replace(id)
+        case ComponentType.CrankSet =>
+          crankSet.replace(id)
         case _ =>
           identity

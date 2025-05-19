@@ -42,7 +42,8 @@ final case class Model(
         fork = config.fork,
         frontDerailleur = config.frontDerailleur,
         rearDerailleur = config.rearDerailleur,
-        rearMudguard = config.rearMudguard
+        rearMudguard = config.rearMudguard,
+        crankSet = config.crankSet
       )
     }
 

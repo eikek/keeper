@@ -21,6 +21,11 @@ export default {
 
         },
     },
+    variants: {
+        extend: {
+            backgroundOpacity: ['dark']
+        }
+    },    
     plugins: [],
 }
 

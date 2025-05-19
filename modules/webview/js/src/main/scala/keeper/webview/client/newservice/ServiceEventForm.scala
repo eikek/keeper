@@ -244,8 +244,8 @@ object ServiceEventForm {
   ) =
     div(
       cls := Css.flexRowCenter + Css(
-        "py-2 px-2 text-lg rounded dark:bg-lime-800 dark:text-slate-200 dark:bg-opacity-90"
-      ) + Css("bg-blue-500 bg-opacity-75 text-slate-200"),
+        "py-2 px-2 text-lg rounded dark:bg-lime-800/90 dark:text-slate-200"
+      ) + Css("bg-blue-500/75 text-slate-200"),
       div(
         cls := Css("grow") + Css.flexRowCenter,
         div(
@@ -283,8 +283,8 @@ object ServiceEventForm {
             Css.iconLink,
             Css.flexCol,
             Css("items-center"),
-            (Css("dark:bg-lime-500 dark:bg-opacity-25") +
-              Css("bg-blue-500 bg-opacity-50"))
+            (Css("dark:bg-lime-500/25") +
+              Css("bg-blue-500/50"))
               .when(sel == newForm.eventName)
           )
         ),
