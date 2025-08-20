@@ -33,8 +33,8 @@ object Dependencies {
     val postgres = "42.7.0"
     val scalaJsDom = "2.8.1"
     val scalaJsTime = "2.6.0"
-    val scribeSlf4j = "3.16.1"
-    val scribe = "3.16.1"
+    val scribeSlf4j = "3.17.0"
+    val scribe = "3.17.0"
     val skunk = "1.1.0-M3"
   }
 
