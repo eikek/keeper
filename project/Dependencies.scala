@@ -22,7 +22,7 @@ object Dependencies {
     val flyway = "10.0.1"
     val h2 = "2.2.224"
     val monocle = "3.3.0"
-    val munit = "1.1.0"
+    val munit = "1.1.1"
     val munitCatsEffect = "2.1.0"
     val scodec1 = "1.11.10"
     val scodec2 = "2.2.2"
