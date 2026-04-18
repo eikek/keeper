@@ -1,7 +1,7 @@
 lib: rec {
-  version = "0.4.0-SNAPSHOT";
+  version = "0.5.0-SNAPSHOT";
 
-  latest-release = "0.3.1";
+  latest-release = "0.4.0";
 
   license = lib.licenses.gpl3;
   homepage = https://github.com/eikek/keeper;

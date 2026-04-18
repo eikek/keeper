@@ -15,7 +15,7 @@ in
 
     src = fetchzip {
       url = "https://github.com/eikek/keeper/releases/download/v${version}/keeper-cli-${version}.zip";
-      sha256 = "sha256-QbvhMg1qEk0ibnq3yc3sTIriZOM528rv7cN+YnPzvuM=";
+      sha256 = "sha256-gOnlRBxM8YFyATVlxsR6dxGcx397MEA3bWioZ0GPUz8=";
     };
 
     buildPhase = "true";
