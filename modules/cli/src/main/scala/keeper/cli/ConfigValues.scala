@@ -11,6 +11,7 @@ import fs2.io.file.Path
 import keeper.bikes.db.PostgresConfig
 import keeper.bikes.fit4s.Fit4sConfig
 import keeper.bikes.strava.StravaConfig
+import keeper.bikes.ventoux.VentouxConfig
 import keeper.cli.config.LoggingConfig
 import keeper.common.Password
 import keeper.strava.{StravaAppCredentials, StravaClientConfig}
@@ -52,6 +53,14 @@ object ConfigValues {
     val uri = config("FIT4S_URI").as[Uri]
     val timeout = config("FIT4S_TIMEOUT", "60s").as[Duration]
     (uri, timeout).mapN(Fit4sConfig.apply)
+  }
+
+  val ventoux = {
+    val uri = config("VENTOUX_URI").as[Uri]
+    val timeout = config("VENTOUX_TIMEOUT", "60s").as[Duration]
+    val apikey = config("VENTOUX_API_KEY")
+    val tz = config("VENTOUX_TIMEZONE", "Europe/Paris").as[ZoneId]
+    (uri, apikey, timeout, tz).mapN(VentouxConfig.apply)
   }
 
   val strava = {

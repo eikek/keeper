@@ -75,7 +75,7 @@ trait PostgresTest {
   val bikeShop: Resource[IO, BikeShop[IO]] =
     randomDbWithSchema.flatMap { dbCfg =>
       KeeperBikeShop[IO](
-        Config(dbCfg, None, None),
+        Config(dbCfg, None, None, None),
         makeSession(dbCfg)
       )
     }

@@ -82,7 +82,7 @@
         KEEPER_POSTGRES_USER = "dev";
         KEEPER_POSTGRES_PASSWORD = "dev";
         KEEPER_POSTGRES_DEBUG = "false";
-        KEEPER_FIT4S_URI = "http://localhost:8181";
+#        KEEPER_FIT4S_URI = "http://localhost:8181";
       };
     });
   };
