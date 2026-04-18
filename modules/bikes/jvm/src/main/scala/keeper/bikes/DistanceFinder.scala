@@ -13,6 +13,8 @@ import keeper.bikes.fit4s.{Fit4sConfig, Fit4sDistanceFinder}
 import keeper.bikes.model.BikeTotal
 import keeper.bikes.strava.StravaDistanceFinder
 import keeper.bikes.util.DateUtil
+import keeper.bikes.ventoux.VentouxConfig
+import keeper.bikes.ventoux.VentouxDistanceFinder
 import keeper.strava.StravaService
 
 trait DistanceFinder[F[_]]:
@@ -51,10 +53,15 @@ object DistanceFinder:
           .last
 
   def resource[F[_]: Async: Network](
+      ventouxConfig: Option[VentouxConfig],
       fit4sConfig: Option[Fit4sConfig],
       stravaClient: Option[StravaService[F]]
   ): Resource[F, DistanceFinder[F]] =
     for {
+      vtx <- ventouxConfig match
+        case None     => Resource.pure(unsupported[F])
+        case Some(vc) => VentouxDistanceFinder.resource(vc)
+
       fit4s <- fit4sConfig match
         case None     => Resource.pure(unsupported[F])
         case Some(fc) => Fit4sDistanceFinder.resource(fc)
@@ -62,4 +69,4 @@ object DistanceFinder:
       strava = stravaClient match
         case Some(cl) => StravaDistanceFinder[F](cl)
         case None     => unsupported[F]
-    } yield DistanceFinder.findFirst(List(fit4s, strava))
+    } yield DistanceFinder.findFirst(List(vtx, fit4s, strava))

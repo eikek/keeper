@@ -40,7 +40,7 @@ object KeeperBikeShop:
         .map(cfg => StravaService.resource(cfg, pool).map(_.some))
         .getOrElse(Resource.pure(None))
 
-      df <- DistanceFinder.resource[F](config.fit4sConfig, strava)
+      df <- DistanceFinder.resource[F](config.ventouxConfig, config.fit4sConfig, strava)
 
       _ <- Resource.eval(pool.use(s => SchemaMigration[F](s).migrate))
 
